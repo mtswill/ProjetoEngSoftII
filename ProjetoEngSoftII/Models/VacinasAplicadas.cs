@@ -9,6 +9,8 @@ namespace ProjetoEngSoftII.Models
     [Table("vacinas_aplicadas")]
     public class VacinasAplicadas
     {
+        public int IdCarteiraVacinacao { get; set; }
+        public int IdVacina { get; set; }
         public CarteiraVacinacao CarteiraVacinacao { get; set; }
         public Vacina Vacina { get; set; }
     }

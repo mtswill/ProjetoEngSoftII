@@ -27,7 +27,6 @@ namespace ProjetoEngSoftII.Data
             modelBuilder.Entity<Endereco>().HasKey(end => new { end.Cep, end.Numero });
 
             modelBuilder.Entity<CarteiraVacinacao>().HasKey(cv => cv.Id);
-            modelBuilder.Entity<CarteiraVacinacao>().HasMany(cv => cv.Vacinas);
 
             modelBuilder.Entity<Vacina>().HasKey(v => v.Id);
         }
