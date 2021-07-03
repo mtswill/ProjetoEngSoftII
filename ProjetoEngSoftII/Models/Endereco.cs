@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoEngSoftII.Models
 {
+    [Table("endereco")]
     public class Endereco
     {
-        [Key]
         [Column("cep")]
         public string Cep { get; set; }
 
@@ -15,7 +15,6 @@ namespace ProjetoEngSoftII.Models
         [Column("bairro")]
         public string Bairro { get; set; }
 
-        [Key]
         [Column("numero")]
         public string Numero { get; set; }
 
