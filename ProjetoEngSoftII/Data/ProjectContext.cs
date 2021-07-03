@@ -18,6 +18,12 @@ namespace ProjetoEngSoftII.Data
         {
         }
 
-        public DbSet<Pessoa> Pessoa { get; set; }
+        public DbSet<Paciente> Paciente { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Endereco>()
+                .HasKey(end => new { end.Cep, end.Numero });
+        }
     }
 }
