@@ -6,6 +6,7 @@ namespace ProjetoEngSoftII.Models
     [Table("endereco")]
     public class Endereco
     {
+        [ForeignKey("cep")]
         [Column("cep")]
         public string Cep { get; set; }
 
@@ -15,6 +16,7 @@ namespace ProjetoEngSoftII.Models
         [Column("bairro")]
         public string Bairro { get; set; }
 
+        [ForeignKey("numero")]
         [Column("numero")]
         public string Numero { get; set; }
 

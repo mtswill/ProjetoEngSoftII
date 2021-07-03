@@ -18,12 +18,18 @@ namespace ProjetoEngSoftII.Data
         {
         }
 
-        public DbSet<Paciente> Paciente { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Endereco>()
-                .HasKey(end => new { end.Cep, end.Numero });
+            modelBuilder.Entity<Paciente>().HasKey(p => p.Id);
+            modelBuilder.Entity<Paciente>().HasOne(p => p.CarteiraVacinacao);
+            modelBuilder.Entity<Paciente>().HasOne(p => p.Endereco);
+
+            modelBuilder.Entity<Endereco>().HasKey(end => new { end.Cep, end.Numero });
+
+            modelBuilder.Entity<CarteiraVacinacao>().HasKey(cv => cv.Id);
+            modelBuilder.Entity<CarteiraVacinacao>().HasMany(cv => cv.Vacinas);
+
+            modelBuilder.Entity<Vacina>().HasKey(v => v.Id);
         }
     }
 }

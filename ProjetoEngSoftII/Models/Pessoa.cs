@@ -9,7 +9,6 @@ namespace ProjetoEngSoftII.Models
 {
     public class Pessoa
     {
-        [Key]
         [Column("id")]
         public int Id { get; set; }
 

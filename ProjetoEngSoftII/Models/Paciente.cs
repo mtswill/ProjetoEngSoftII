@@ -13,7 +13,6 @@ namespace ProjetoEngSoftII.Models
         [Column("cns")]
         public string Cns { get; set; }
 
-        [ForeignKey("carteira_vacinacao")]
         public CarteiraVacinacao CarteiraVacinacao { get; set; }
     }
 }

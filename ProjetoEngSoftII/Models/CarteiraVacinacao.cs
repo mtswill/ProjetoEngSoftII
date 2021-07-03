@@ -9,5 +9,7 @@ namespace ProjetoEngSoftII.Models
     {
         [Column("id")]
         public int Id { get; set; }
+
+        public List<Vacina> Vacinas { get; set; }
     }
 }
