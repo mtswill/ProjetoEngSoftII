@@ -8,15 +8,16 @@ using Microsoft.Extensions.Logging;
 using ProjetoEngSoftII.Data;
 using ProjetoEngSoftII.Models;
 using ProjetoEngSoftII.Repositories;
+using ProjetoEngSoftII.Repositories.PacienteRespository;
 
 namespace ProjetoEngSoftII.Controllers
 {
     public class PacienteController : Controller
     {
         private readonly ILogger<PacienteController> _logger;
-        private readonly IRepository<Paciente> _repository;
+        private readonly PacienteRepository _repository;
 
-        public PacienteController(ILogger<PacienteController> logger, IRepository<Paciente> repository)
+        public PacienteController(ILogger<PacienteController> logger, PacienteRepository repository)
         {
             _logger = logger;
             _repository = repository;
@@ -34,12 +35,12 @@ namespace ProjetoEngSoftII.Controllers
             return View();
         }
         
-        public IActionResult Edit(long? id)
+        public IActionResult Edit(string cpf)
         {
-            if (id.Equals(null))
+            if (cpf.Equals(null))
                 return RedirectToAction(nameof(ErrorViewModel), new { message = "ID não especificado" });
 
-            var paciente = _repository.FindById((long)id);
+            var paciente = _repository.FindByCpf(cpf);
 
             if (paciente.Equals(null))
                 return RedirectToAction(nameof(ErrorViewModel), new { message = "ID não encontrado" });
@@ -81,7 +82,7 @@ namespace ProjetoEngSoftII.Controllers
                 }
                 catch (Exception ex)
                 {
-                    if (!ExistePaciente(paciente.Id))
+                    if (!ExistePaciente(paciente.Cpf))
                     {
                         return RedirectToAction(nameof(ErrorViewModel), new { message = ex.Message });
                     }
@@ -100,9 +101,9 @@ namespace ProjetoEngSoftII.Controllers
 
         #region Funções
         
-        public bool ExistePaciente(long id)
+        public bool ExistePaciente(string cpf)
         {
-            return _repository.FindById(id).Equals(null) ? false : true;
+            return _repository.Exists(cpf);
         }
         
         #endregion Funções

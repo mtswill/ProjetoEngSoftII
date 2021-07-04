@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjetoEngSoftII.Data;
 using ProjetoEngSoftII.Repositories;
+using ProjetoEngSoftII.Repositories.PacienteRespository;
 
 namespace ProjetoEngSoftII
 {
@@ -32,7 +33,7 @@ namespace ProjetoEngSoftII
             services.AddDbContext<ProjectContext>(options => options.UseNpgsql(connectionString));
 
             //DI
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IPacienteRepository), typeof(PacienteRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
