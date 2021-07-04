@@ -10,7 +10,7 @@ using ProjetoEngSoftII.Data;
 namespace ProjetoEngSoftII.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20210704182416_migration")]
+    [Migration("20210704192145_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

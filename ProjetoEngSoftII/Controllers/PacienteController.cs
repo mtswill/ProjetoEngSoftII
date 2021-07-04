@@ -26,14 +26,10 @@ namespace ProjetoEngSoftII.Controllers
         #region Views
 
         public IActionResult Index()
-        {
-            return View(_repository.FindAll().ToList());
-        }
+            => View(_repository.FindAll().ToList());
         
         public IActionResult Create()
-        {
-            return View();
-        }
+            => View();
         
         public IActionResult Edit(string cpf)
         {
@@ -102,9 +98,7 @@ namespace ProjetoEngSoftII.Controllers
         #region Funções
         
         public bool ExistePaciente(string cpf)
-        {
-            return _repository.Exists(cpf);
-        }
+            => _repository.Exists(cpf);
         
         #endregion Funções
     }

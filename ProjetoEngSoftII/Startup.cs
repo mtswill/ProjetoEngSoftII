@@ -33,7 +33,7 @@ namespace ProjetoEngSoftII
             services.AddDbContext<ProjectContext>(options => options.UseNpgsql(connectionString));
 
             //DI
-            services.AddScoped(typeof(IPacienteRepository), typeof(PacienteRepository));
+            services.AddScoped<PacienteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

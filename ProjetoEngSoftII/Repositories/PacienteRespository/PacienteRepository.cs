@@ -16,10 +16,47 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
         {
             _context = context;
         }
+        public Paciente FindByCpf(string cpf)
+            => _context.Paciente.SingleOrDefault(p => p.Cpf.Equals(cpf));
+
+        public List<Paciente> FindAll()
+            => _context.Paciente.ToList();
 
         public Paciente Create(Paciente paciente)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _context.Paciente.Add(paciente);
+                _context.SaveChanges();
+                return paciente;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Paciente Update(Paciente paciente)
+        {
+            var result = _context.Paciente.SingleOrDefault(p => p.Cpf.Equals(paciente.Cpf));
+
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(paciente);
+                    _context.SaveChanges();
+                    return result;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Delete(string cpf)
@@ -28,23 +65,6 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
         }
 
         public bool Exists(string cpf)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Paciente> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Paciente FindByCpf(string cpf)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Paciente Update(Paciente paciente)
-        {
-            throw new NotImplementedException();
-        }
+            => _context.Paciente.Any(p => p.Cpf.Equals(cpf));
     }
 }
