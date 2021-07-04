@@ -27,33 +27,33 @@ namespace ProjetoEngSoftII.Migrations
                         .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("PacienteCpf")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PacienteCpf");
 
                     b.ToTable("carteira_vacinacao");
                 });
 
             modelBuilder.Entity("ProjetoEngSoftII.Models.Paciente", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<long?>("CarteiraVacinacaoId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Cpf")
+                        .HasColumnType("text")
+                        .HasColumnName("cpf");
 
                     b.Property<string>("Cns")
                         .HasColumnType("text")
                         .HasColumnName("cns");
 
-                    b.Property<string>("Cpf")
-                        .HasColumnType("text")
-                        .HasColumnName("cpf");
-
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_nascimento");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     b.Property<string>("Nome")
                         .HasColumnType("text")
@@ -63,9 +63,7 @@ namespace ProjetoEngSoftII.Migrations
                         .HasColumnType("text")
                         .HasColumnName("rg");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarteiraVacinacaoId");
+                    b.HasKey("Cpf");
 
                     b.ToTable("paciente");
                 });
@@ -91,13 +89,13 @@ namespace ProjetoEngSoftII.Migrations
                     b.ToTable("vacina");
                 });
 
-            modelBuilder.Entity("ProjetoEngSoftII.Models.Paciente", b =>
+            modelBuilder.Entity("ProjetoEngSoftII.Models.CarteiraVacinacao", b =>
                 {
-                    b.HasOne("ProjetoEngSoftII.Models.CarteiraVacinacao", "CarteiraVacinacao")
+                    b.HasOne("ProjetoEngSoftII.Models.Paciente", "Paciente")
                         .WithMany()
-                        .HasForeignKey("CarteiraVacinacaoId");
+                        .HasForeignKey("PacienteCpf");
 
-                    b.Navigation("CarteiraVacinacao");
+                    b.Navigation("Paciente");
                 });
 #pragma warning restore 612, 618
         }

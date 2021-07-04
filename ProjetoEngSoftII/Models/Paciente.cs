@@ -13,7 +13,5 @@ namespace ProjetoEngSoftII.Models
         [Column("cns")]
         [Display(Name = "CNS")]
         public string Cns { get; set; }
-
-        public CarteiraVacinacao CarteiraVacinacao { get; set; }
     }
 }

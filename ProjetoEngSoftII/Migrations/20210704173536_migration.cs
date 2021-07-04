@@ -9,15 +9,19 @@ namespace ProjetoEngSoftII.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "carteira_vacinacao",
+                name: "paciente",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                    cpf = table.Column<string>(type: "text", nullable: false),
+                    cns = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<long>(type: "bigint", nullable: false),
+                    nome = table.Column<string>(type: "text", nullable: true),
+                    data_nascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    rg = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_carteira_vacinacao", x => x.id);
+                    table.PrimaryKey("PK_paciente", x => x.cpf);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,45 +39,40 @@ namespace ProjetoEngSoftII.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "paciente",
+                name: "carteira_vacinacao",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    cns = table.Column<string>(type: "text", nullable: true),
-                    CarteiraVacinacaoId = table.Column<long>(type: "bigint", nullable: true),
-                    nome = table.Column<string>(type: "text", nullable: true),
-                    data_nascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    cpf = table.Column<string>(type: "text", nullable: true),
-                    rg = table.Column<string>(type: "text", nullable: true)
+                    PacienteCpf = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_paciente", x => x.id);
+                    table.PrimaryKey("PK_carteira_vacinacao", x => x.id);
                     table.ForeignKey(
-                        name: "FK_paciente_carteira_vacinacao_CarteiraVacinacaoId",
-                        column: x => x.CarteiraVacinacaoId,
-                        principalTable: "carteira_vacinacao",
-                        principalColumn: "id",
+                        name: "FK_carteira_vacinacao_paciente_PacienteCpf",
+                        column: x => x.PacienteCpf,
+                        principalTable: "paciente",
+                        principalColumn: "cpf",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_paciente_CarteiraVacinacaoId",
-                table: "paciente",
-                column: "CarteiraVacinacaoId");
+                name: "IX_carteira_vacinacao_PacienteCpf",
+                table: "carteira_vacinacao",
+                column: "PacienteCpf");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "paciente");
+                name: "carteira_vacinacao");
 
             migrationBuilder.DropTable(
                 name: "vacina");
 
             migrationBuilder.DropTable(
-                name: "carteira_vacinacao");
+                name: "paciente");
         }
     }
 }

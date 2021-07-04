@@ -20,9 +20,10 @@ namespace ProjetoEngSoftII.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Paciente>().HasKey(p => p.Id);
-            modelBuilder.Entity<Paciente>().HasOne(p => p.CarteiraVacinacao);
+            modelBuilder.Entity<Paciente>().HasKey(p => p.Cpf);
             //modelBuilder.Entity<Paciente>().HasOne(p => p.Endereco);
+
+            modelBuilder.Entity<CarteiraVacinacao>().HasOne(cv => cv.Paciente);
 
             //modelBuilder.Entity<Endereco>().HasKey(end => new { end.Cep, end.Numero });
 
