@@ -9,19 +9,22 @@ namespace ProjetoEngSoftII.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "paciente",
+                name: "endereco",
                 columns: table => new
                 {
-                    cpf = table.Column<string>(type: "text", nullable: false),
-                    cns = table.Column<string>(type: "text", nullable: true),
-                    id = table.Column<long>(type: "bigint", nullable: false),
-                    nome = table.Column<string>(type: "text", nullable: true),
-                    data_nascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    rg = table.Column<string>(type: "text", nullable: true)
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    cep = table.Column<string>(type: "text", nullable: true),
+                    logradouro = table.Column<string>(type: "text", nullable: true),
+                    bairro = table.Column<string>(type: "text", nullable: true),
+                    numero = table.Column<string>(type: "text", nullable: true),
+                    cidade = table.Column<string>(type: "text", nullable: true),
+                    descricao = table.Column<string>(type: "text", nullable: true),
+                    estado = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_paciente", x => x.cpf);
+                    table.PrimaryKey("PK_endereco", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -36,6 +39,29 @@ namespace ProjetoEngSoftII.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_vacina", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "paciente",
+                columns: table => new
+                {
+                    cpf = table.Column<string>(type: "text", nullable: false),
+                    cns = table.Column<string>(type: "text", nullable: true),
+                    id = table.Column<long>(type: "bigint", nullable: false),
+                    nome = table.Column<string>(type: "text", nullable: true),
+                    data_nascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    rg = table.Column<string>(type: "text", nullable: true),
+                    EnderecoId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_paciente", x => x.cpf);
+                    table.ForeignKey(
+                        name: "FK_paciente_endereco_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "endereco",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,6 +87,11 @@ namespace ProjetoEngSoftII.Migrations
                 name: "IX_carteira_vacinacao_PacienteCpf",
                 table: "carteira_vacinacao",
                 column: "PacienteCpf");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_paciente_EnderecoId",
+                table: "paciente",
+                column: "EnderecoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -73,6 +104,9 @@ namespace ProjetoEngSoftII.Migrations
 
             migrationBuilder.DropTable(
                 name: "paciente");
+
+            migrationBuilder.DropTable(
+                name: "endereco");
         }
     }
 }

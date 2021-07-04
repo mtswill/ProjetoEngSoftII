@@ -26,8 +26,8 @@ namespace ProjetoEngSoftII.Models
         [Display(Name = "RG")]
         public string Rg { get; set; }
 
-        //[Column("endereco")]
-        //[Display(Name = "Endereço")]
-        //public Endereco Endereco { get; set; }
+        [Column("endereco")]
+        [Display(Name = "Endereço")]
+        public Endereco Endereco { get; set; }
     }
 }

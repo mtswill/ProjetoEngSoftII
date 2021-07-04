@@ -37,6 +37,47 @@ namespace ProjetoEngSoftII.Migrations
                     b.ToTable("carteira_vacinacao");
                 });
 
+            modelBuilder.Entity("ProjetoEngSoftII.Models.Endereco", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Bairro")
+                        .HasColumnType("text")
+                        .HasColumnName("bairro");
+
+                    b.Property<string>("Cep")
+                        .HasColumnType("text")
+                        .HasColumnName("cep");
+
+                    b.Property<string>("Cidade")
+                        .HasColumnType("text")
+                        .HasColumnName("cidade");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("text")
+                        .HasColumnName("descricao");
+
+                    b.Property<string>("Estado")
+                        .HasColumnType("text")
+                        .HasColumnName("estado");
+
+                    b.Property<string>("Logradouro")
+                        .HasColumnType("text")
+                        .HasColumnName("logradouro");
+
+                    b.Property<string>("Numero")
+                        .HasColumnType("text")
+                        .HasColumnName("numero");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("endereco");
+                });
+
             modelBuilder.Entity("ProjetoEngSoftII.Models.Paciente", b =>
                 {
                     b.Property<string>("Cpf")
@@ -51,6 +92,9 @@ namespace ProjetoEngSoftII.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_nascimento");
 
+                    b.Property<long?>("EnderecoId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("Id")
                         .HasColumnType("bigint")
                         .HasColumnName("id");
@@ -64,6 +108,8 @@ namespace ProjetoEngSoftII.Migrations
                         .HasColumnName("rg");
 
                     b.HasKey("Cpf");
+
+                    b.HasIndex("EnderecoId");
 
                     b.ToTable("paciente");
                 });
@@ -96,6 +142,15 @@ namespace ProjetoEngSoftII.Migrations
                         .HasForeignKey("PacienteCpf");
 
                     b.Navigation("Paciente");
+                });
+
+            modelBuilder.Entity("ProjetoEngSoftII.Models.Paciente", b =>
+                {
+                    b.HasOne("ProjetoEngSoftII.Models.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoId");
+
+                    b.Navigation("Endereco");
                 });
 #pragma warning restore 612, 618
         }

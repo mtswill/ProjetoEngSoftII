@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProjetoEngSoftII.Models.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjetoEngSoftII.Models
 {
     [Table("endereco")]
-    public class Endereco
+    public class Endereco : BaseEntity
     {
-        [ForeignKey("cep")]
         [Column("cep")]
         public string Cep { get; set; }
 
@@ -16,15 +15,17 @@ namespace ProjetoEngSoftII.Models
         [Column("bairro")]
         public string Bairro { get; set; }
 
-        [ForeignKey("numero")]
         [Column("numero")]
         public string Numero { get; set; }
 
         [Column("cidade")]
         public string Cidade { get; set; }
+        
+        [Column("descricao")]
+        public string Descricao { get; set; }
 
         [Column("estado")]
-        public UF Estado { get; set; }
+        public string Estado { get; set; }
     }
 
     public enum UF
