@@ -22,13 +22,15 @@ namespace ProjetoEngSoftII.Data
         {
             modelBuilder.Entity<Paciente>().HasKey(p => p.Id);
             modelBuilder.Entity<Paciente>().HasOne(p => p.CarteiraVacinacao);
-            modelBuilder.Entity<Paciente>().HasOne(p => p.Endereco);
+            //modelBuilder.Entity<Paciente>().HasOne(p => p.Endereco);
 
-            modelBuilder.Entity<Endereco>().HasKey(end => new { end.Cep, end.Numero });
+            //modelBuilder.Entity<Endereco>().HasKey(end => new { end.Cep, end.Numero });
 
             modelBuilder.Entity<CarteiraVacinacao>().HasKey(cv => cv.Id);
 
             modelBuilder.Entity<Vacina>().HasKey(v => v.Id);
         }
+
+        public DbSet<ProjetoEngSoftII.Models.Paciente> Paciente { get; set; }
     }
 }
