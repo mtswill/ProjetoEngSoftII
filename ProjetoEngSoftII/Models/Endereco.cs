@@ -28,33 +28,33 @@ namespace ProjetoEngSoftII.Models
         public string Estado { get; set; }
     }
 
-    public enum UF
+    public static class Estados
     {
-        RO,
-        AC,
-        AM,
-        RR,
-        AP,
-        TO,
-        MA,
-        PI,
-        CE,
-        RN,
-        PB,
-        PE,
-        AL,
-        SE,
-        BA,
-        MG,
-        ES,
-        RJ,
-        SP,
-        PR,
-        SC,
-        RS,
-        MS,
-        MT,
-        GO,
-        DF
+        public const string Rondonia = "Rondônia";
+        public const string Acre = "Acre";
+        public const string Amazonas = "Amazonas";
+        public const string Roraima = "Roraima";
+        public const string Amapa = "Amapá";
+        public const string Tocantins = "Tocantins";
+        public const string Maranhao = "Maranhão";
+        public const string Paui = "Piauí";
+        public const string Ceara = "Ceará";
+        public const string RioGrandeDoNorte = "Rio Grande do Norte";
+        public const string Paraiba = "Paraíba";
+        public const string Pernambuco = "Pernambuco";
+        public const string Alagoas = "Alagoas";
+        public const string Sergipe = "Sergipe";
+        public const string Bahia = "Bahia";
+        public const string MinasGerais = "Minas Gerais";
+        public const string EspiritoSanto = "Espírito Santo";
+        public const string RioDeJaneiro = "Rio de Janeiro";
+        public const string SaoPaulo = "São Paulo";
+        public const string Parana = "Paraná";
+        public const string SantaCatarina = "Santa Catarina";
+        public const string RioGrandeDoSul = "Rio Grande do Sul";
+        public const string MatoGrossoDoSul = "Mato Grosso do Sul";
+        public const string MatoGrosso = "Mato Grosso";
+        public const string Goias = "Goiás";
+        public const string DistritoFederal = "Distrito Federal";
     }
 }
