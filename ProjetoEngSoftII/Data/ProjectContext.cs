@@ -21,8 +21,7 @@ namespace ProjetoEngSoftII.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Paciente>().HasKey(p => p.Cpf);
-            modelBuilder.Entity<Paciente>().HasOne(p => p.Endereco);
-            //modelBuilder.Entity<Paciente>().HasOne(p => p.Endereco);
+            modelBuilder.Entity<Paciente>().HasOne(p => p.Endereco).WithOne();
             
             modelBuilder.Entity<Endereco>().HasKey(end => end.Id);
 
@@ -32,8 +31,7 @@ namespace ProjetoEngSoftII.Data
             modelBuilder.Entity<Vacina>().HasKey(v => v.Id);
         }
 
-        public DbSet<ProjetoEngSoftII.Models.Paciente> Paciente { get; set; }
-
-        public DbSet<ProjetoEngSoftII.Models.Endereco> Endereco { get; set; }
+        public DbSet<Paciente> Paciente { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
     }
 }

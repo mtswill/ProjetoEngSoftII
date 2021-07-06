@@ -8,7 +8,7 @@ namespace ProjetoEngSoftII.Models.Base
 {
     public class BaseEntity
     {
-        [Column("id")]
+        [ForeignKey("id")]
         public long Id { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ProjetoEngSoftII.Data;
+﻿using Npgsql;
+using ProjetoEngSoftII.Data;
 using ProjetoEngSoftII.Models;
 using ProjetoEngSoftII.Models.Base;
 using System;
@@ -17,7 +18,10 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
             _context = context;
         }
         public Paciente FindByCpf(string cpf)
-            => _context.Paciente.SingleOrDefault(p => p.Cpf.Equals(cpf));
+        {
+            var paciente = _context.Paciente.SingleOrDefault(p => p.Cpf.Equals(cpf));
+            return GetEndereco(paciente);
+        }
 
         public List<Paciente> FindAll()
             => _context.Paciente.ToList();
@@ -30,7 +34,7 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
                 _context.SaveChanges();
                 return paciente;
             }
-            catch (Exception)
+            catch (PostgresException ex)
             {
                 throw;
             }
@@ -66,5 +70,17 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
 
         public bool Exists(string cpf)
             => _context.Paciente.Any(p => p.Cpf.Equals(cpf));
+
+        private Paciente GetEndereco(Paciente paciente)
+        {
+            if (!paciente.Equals(null))
+            {
+                var endereco = _context.Endereco.SingleOrDefault(e => e.Id.Equals(paciente.EnderecoId));
+                if (!endereco.Equals(null))
+                    paciente.Endereco = endereco;
+            }
+
+            return paciente;
+        }
     }
 }

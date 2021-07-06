@@ -10,7 +10,7 @@ using ProjetoEngSoftII.Data;
 namespace ProjetoEngSoftII.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20210704192145_migration")]
+    [Migration("20210705235438_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +26,6 @@ namespace ProjetoEngSoftII.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("PacienteCpf")
@@ -44,7 +43,6 @@ namespace ProjetoEngSoftII.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Bairro")
@@ -94,12 +92,11 @@ namespace ProjetoEngSoftII.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("data_nascimento");
 
-                    b.Property<long?>("EnderecoId")
+                    b.Property<long>("EnderecoId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("Id")
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Nome")
                         .HasColumnType("text")
@@ -111,7 +108,8 @@ namespace ProjetoEngSoftII.Migrations
 
                     b.HasKey("Cpf");
 
-                    b.HasIndex("EnderecoId");
+                    b.HasIndex("EnderecoId")
+                        .IsUnique();
 
                     b.ToTable("paciente");
                 });
@@ -121,7 +119,6 @@ namespace ProjetoEngSoftII.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("id")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Descricao")
@@ -149,8 +146,10 @@ namespace ProjetoEngSoftII.Migrations
             modelBuilder.Entity("ProjetoEngSoftII.Models.Paciente", b =>
                 {
                     b.HasOne("ProjetoEngSoftII.Models.Endereco", "Endereco")
-                        .WithMany()
-                        .HasForeignKey("EnderecoId");
+                        .WithOne()
+                        .HasForeignKey("ProjetoEngSoftII.Models.Paciente", "EnderecoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Endereco");
                 });

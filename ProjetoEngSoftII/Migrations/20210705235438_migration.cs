@@ -12,7 +12,7 @@ namespace ProjetoEngSoftII.Migrations
                 name: "endereco",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     cep = table.Column<string>(type: "text", nullable: true),
                     logradouro = table.Column<string>(type: "text", nullable: true),
@@ -24,21 +24,21 @@ namespace ProjetoEngSoftII.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_endereco", x => x.id);
+                    table.PrimaryKey("PK_endereco", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "vacina",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nome = table.Column<string>(type: "text", nullable: true),
                     descricao = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_vacina", x => x.id);
+                    table.PrimaryKey("PK_vacina", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,11 +47,11 @@ namespace ProjetoEngSoftII.Migrations
                 {
                     cpf = table.Column<string>(type: "text", nullable: false),
                     cns = table.Column<string>(type: "text", nullable: true),
-                    id = table.Column<long>(type: "bigint", nullable: false),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     nome = table.Column<string>(type: "text", nullable: true),
                     data_nascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     rg = table.Column<string>(type: "text", nullable: true),
-                    EnderecoId = table.Column<long>(type: "bigint", nullable: true)
+                    EnderecoId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,21 +60,21 @@ namespace ProjetoEngSoftII.Migrations
                         name: "FK_paciente_endereco_EnderecoId",
                         column: x => x.EnderecoId,
                         principalTable: "endereco",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "carteira_vacinacao",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PacienteCpf = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_carteira_vacinacao", x => x.id);
+                    table.PrimaryKey("PK_carteira_vacinacao", x => x.Id);
                     table.ForeignKey(
                         name: "FK_carteira_vacinacao_paciente_PacienteCpf",
                         column: x => x.PacienteCpf,
@@ -91,7 +91,8 @@ namespace ProjetoEngSoftII.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_paciente_EnderecoId",
                 table: "paciente",
-                column: "EnderecoId");
+                column: "EnderecoId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
