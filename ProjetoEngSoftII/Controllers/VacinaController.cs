@@ -13,7 +13,7 @@ namespace ProjetoEngSoftII.Controllers
             return View();
         }
 
-        public IActionResult Teste(string tipo)
+        public IActionResult InserirVacinado()
         {
             return View();
         }
