@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoEngSoftII.Controllers
+namespace ProjetoEngSoftII.Controllers.Covid
 {
-    public class VacinaController : Controller
+    public class CovidController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult InserirVacinado()
+        public IActionResult VacinacaoIndex()
+        {
+            return View();
+        }
+
+        public IActionResult LeitosIndex()
         {
             return View();
         }
