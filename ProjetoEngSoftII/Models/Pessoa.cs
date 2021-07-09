@@ -26,11 +26,12 @@ namespace ProjetoEngSoftII.Models
         [Display(Name = "RG")]
         public string Rg { get; set; }
 
-        [Display(Name = "Endereço")]
-        public Endereco Endereco { get; set; }
-
         [ForeignKey("endereco_id")]
         [Display(Name = "Endereço")]
         public long EnderecoId { get; set; }
+
+        //Classes externas
+        [Display(Name = "Endereço")]
+        public Endereco Endereco { get; set; }
     }
 }

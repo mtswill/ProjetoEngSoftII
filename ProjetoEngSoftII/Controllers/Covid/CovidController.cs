@@ -18,6 +18,11 @@ namespace ProjetoEngSoftII.Controllers.Covid
             return View();
         }
 
+        public IActionResult InserirVacinadoView()
+        {
+            return View();
+        }
+
         public IActionResult LeitosIndex()
         {
             return View();

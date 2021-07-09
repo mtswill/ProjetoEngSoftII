@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ProjetoEngSoftII.Models;
+using ProjetoEngSoftII.Models.Vacinas;
 
 namespace ProjetoEngSoftII.Data
 {
@@ -29,9 +30,17 @@ namespace ProjetoEngSoftII.Data
             modelBuilder.Entity<CarteiraVacinacao>().HasOne(cv => cv.Paciente);
 
             modelBuilder.Entity<Vacina>().HasKey(v => v.Id);
+
+            modelBuilder.Entity<MarcaVacina>().HasKey(mv => mv.Id);
+
+            modelBuilder.Entity<Vacinado>().HasKey(v => v.Id);
+            modelBuilder.Entity<Vacinado>().HasOne(v => v.MarcaVacina).WithOne();
+            modelBuilder.Entity<Vacinado>().HasOne(v => v.Paciente).WithOne();
         }
 
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<MarcaVacina> MarcaVacina { get; set; }
+        public DbSet<Vacinado> Vacinado { get; set; }
     }
 }
