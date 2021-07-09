@@ -31,16 +31,16 @@ namespace ProjetoEngSoftII.Data
 
             modelBuilder.Entity<Vacina>().HasKey(v => v.Id);
 
-            modelBuilder.Entity<MarcaVacina>().HasKey(mv => mv.Id);
+            modelBuilder.Entity<MarcaVacinaCovid>().HasKey(mv => mv.Id);
 
             modelBuilder.Entity<Vacinado>().HasKey(v => v.Id);
-            modelBuilder.Entity<Vacinado>().HasOne(v => v.MarcaVacina).WithOne();
+            modelBuilder.Entity<Vacinado>().HasOne(v => v.MarcaVacinaCovid).WithOne();
             modelBuilder.Entity<Vacinado>().HasOne(v => v.Paciente).WithOne();
         }
 
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
-        public DbSet<MarcaVacina> MarcaVacina { get; set; }
+        public DbSet<MarcaVacinaCovid> MarcaVacinaCovid { get; set; }
         public DbSet<Vacinado> Vacinado { get; set; }
     }
 }

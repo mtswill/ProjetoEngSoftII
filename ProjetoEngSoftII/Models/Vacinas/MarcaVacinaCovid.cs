@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjetoEngSoftII.Models.Vacinas
 {
-    public class MarcaVacina : BaseEntity
+    [Table("marca_vacina_covid")]
+    public class MarcaVacinaCovid : BaseEntity
     {
         [Column("marca")]
         public string Marca { get; set; }

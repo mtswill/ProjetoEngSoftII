@@ -10,7 +10,7 @@ using ProjetoEngSoftII.Data;
 namespace ProjetoEngSoftII.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20210705235438_migration")]
+    [Migration("20210709002203_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,6 +134,58 @@ namespace ProjetoEngSoftII.Migrations
                     b.ToTable("vacina");
                 });
 
+            modelBuilder.Entity("ProjetoEngSoftII.Models.Vacinas.MarcaVacinaCovid", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Marca")
+                        .HasColumnType("text")
+                        .HasColumnName("marca");
+
+                    b.Property<string>("Tipo")
+                        .HasColumnType("text")
+                        .HasColumnName("tipo");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("marca_vacina_covid");
+                });
+
+            modelBuilder.Entity("ProjetoEngSoftII.Models.Vacinas.Vacinado", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("DataVacinacao")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("data_vacinacao");
+
+                    b.Property<string>("Dose")
+                        .HasColumnType("text")
+                        .HasColumnName("dose");
+
+                    b.Property<long>("MarcaVacinaCovidId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("PacienteCpf")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MarcaVacinaCovidId")
+                        .IsUnique();
+
+                    b.HasIndex("PacienteCpf")
+                        .IsUnique();
+
+                    b.ToTable("vacinado");
+                });
+
             modelBuilder.Entity("ProjetoEngSoftII.Models.CarteiraVacinacao", b =>
                 {
                     b.HasOne("ProjetoEngSoftII.Models.Paciente", "Paciente")
@@ -152,6 +204,23 @@ namespace ProjetoEngSoftII.Migrations
                         .IsRequired();
 
                     b.Navigation("Endereco");
+                });
+
+            modelBuilder.Entity("ProjetoEngSoftII.Models.Vacinas.Vacinado", b =>
+                {
+                    b.HasOne("ProjetoEngSoftII.Models.Vacinas.MarcaVacinaCovid", "MarcaVacinaCovid")
+                        .WithOne()
+                        .HasForeignKey("ProjetoEngSoftII.Models.Vacinas.Vacinado", "MarcaVacinaCovidId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjetoEngSoftII.Models.Paciente", "Paciente")
+                        .WithOne()
+                        .HasForeignKey("ProjetoEngSoftII.Models.Vacinas.Vacinado", "PacienteCpf");
+
+                    b.Navigation("MarcaVacinaCovid");
+
+                    b.Navigation("Paciente");
                 });
 #pragma warning restore 612, 618
         }

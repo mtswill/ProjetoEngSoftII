@@ -1,11 +1,9 @@
 ﻿using Npgsql;
 using ProjetoEngSoftII.Data;
 using ProjetoEngSoftII.Models;
-using ProjetoEngSoftII.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetoEngSoftII.Repositories.PacienteRespository
 {
@@ -34,7 +32,7 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
                 _context.SaveChanges();
                 return paciente;
             }
-            catch (PostgresException ex)
+            catch
             {
                 throw;
             }

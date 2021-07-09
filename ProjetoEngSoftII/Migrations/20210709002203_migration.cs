@@ -28,6 +28,20 @@ namespace ProjetoEngSoftII.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "marca_vacina_covid",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    marca = table.Column<string>(type: "text", nullable: true),
+                    tipo = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_marca_vacina_covid", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "vacina",
                 columns: table => new
                 {
@@ -83,6 +97,34 @@ namespace ProjetoEngSoftII.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "vacinado",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PacienteCpf = table.Column<string>(type: "text", nullable: true),
+                    data_vacinacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    MarcaVacinaCovidId = table.Column<long>(type: "bigint", nullable: false),
+                    dose = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_vacinado", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_vacinado_marca_vacina_covid_MarcaVacinaCovidId",
+                        column: x => x.MarcaVacinaCovidId,
+                        principalTable: "marca_vacina_covid",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_vacinado_paciente_PacienteCpf",
+                        column: x => x.PacienteCpf,
+                        principalTable: "paciente",
+                        principalColumn: "cpf",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_carteira_vacinacao_PacienteCpf",
                 table: "carteira_vacinacao",
@@ -93,6 +135,18 @@ namespace ProjetoEngSoftII.Migrations
                 table: "paciente",
                 column: "EnderecoId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_vacinado_MarcaVacinaCovidId",
+                table: "vacinado",
+                column: "MarcaVacinaCovidId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_vacinado_PacienteCpf",
+                table: "vacinado",
+                column: "PacienteCpf",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -102,6 +156,12 @@ namespace ProjetoEngSoftII.Migrations
 
             migrationBuilder.DropTable(
                 name: "vacina");
+
+            migrationBuilder.DropTable(
+                name: "vacinado");
+
+            migrationBuilder.DropTable(
+                name: "marca_vacina_covid");
 
             migrationBuilder.DropTable(
                 name: "paciente");
