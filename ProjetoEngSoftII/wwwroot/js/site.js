@@ -1,4 +1,13 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var testeCont = document.getElementById("teste-container");
 
-// Write your JavaScript code.
+$('#teste-button').on("click", function () {
+    //testeCont.style.backgroundColor = "green";
+
+    if (testeCont.style.backgroundColor === "green") {
+        window.alert("mudou");
+        testeCont.style.backgroundColor = "red";
+    }
+    else {
+        testeCont.style.backgroundColor = "red";
+    }
+});
