@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ProjetoEngSoftII.Models;
 using ProjetoEngSoftII.Models.Vacinas;
+using ProjetoEngSoftII.Models.Enderecos;
 
 namespace ProjetoEngSoftII.Data
 {

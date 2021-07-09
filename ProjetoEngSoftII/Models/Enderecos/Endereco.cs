@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProjetoEngSoftII.Models
+namespace ProjetoEngSoftII.Models.Enderecos
 {
     [Table("endereco")]
     public class Endereco : BaseEntity
@@ -19,7 +19,7 @@ namespace ProjetoEngSoftII.Models
 
         [Column("cidade")]
         public string Cidade { get; set; }
-        
+
         [Column("descricao")]
         public string Descricao { get; set; }
 
