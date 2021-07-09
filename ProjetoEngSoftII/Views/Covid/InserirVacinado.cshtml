@@ -1,4 +1,4 @@
-﻿@model ProjetoEngSoftII.Models.Vacinas.Vacinado
+﻿@model ProjetoEngSoftII.Models.ViewModels.InserirVacinadoViewModel
 
 @{
     ViewData["Title"] = "InserirVacinado";
@@ -13,23 +13,23 @@
         <form asp-action="InserirVacinado">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="PacienteCpf" class="control-label"></label>
-                <input asp-for="PacienteCpf" class="form-control" />
-                <span asp-validation-for="PacienteCpf" class="text-danger"></span>
+                <label asp-for="Vacinado.PacienteCpf" class="control-label"></label>
+                <input asp-for="Vacinado.PacienteCpf" class="form-control" />
+                <span asp-validation-for="Vacinado.PacienteCpf" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataVacinacao" class="control-label"></label>
-                <input asp-for="DataVacinacao" class="form-control" />
-                <span asp-validation-for="DataVacinacao" class="text-danger"></span>
+                <label asp-for="Vacinado.DataVacinacao" class="control-label"></label>
+                <input asp-for="Vacinado.DataVacinacao" class="form-control" />
+                <span asp-validation-for="Vacinado.DataVacinacao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MarcaVacinaCovidId" class="control-label"></label>
-                <select asp-for="MarcaVacinaCovidId" class ="form-control" asp-items="ViewBag.MarcaVacinaCovidId"></select>
+                <label asp-for="Vacinado.MarcaVacinaCovidId" class="control-label"></label>
+                <select asp-for="Vacinado.MarcaVacinaCovidId" class ="form-control" asp-items="@(new SelectList(Model.MarcasVacinaCovid,"Id", "Marca"))"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Dose" class="control-label"></label>
-                <input asp-for="Dose" class="form-control" />
-                <span asp-validation-for="Dose" class="text-danger"></span>
+                <label asp-for="Vacinado.Dose" class="control-label"></label>
+                <input asp-for="Vacinado.Dose" class="form-control" />
+                <span asp-validation-for="Vacinado.Dose" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

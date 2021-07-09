@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoEngSoftII.Models.Vacinas;
+using ProjetoEngSoftII.Models.ViewModels;
 using ProjetoEngSoftII.Repositories.CovidRepository;
+using ProjetoEngSoftII.Repositories.PacienteRespository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +12,13 @@ namespace ProjetoEngSoftII.Controllers.Covid
 {
     public class CovidController : Controller
     {
-        private readonly CovidRepository _repository;
+        private readonly CovidRepository _covidRepository;
+        private readonly PacienteRepository _pacienteRepository;
 
-        public CovidController(CovidRepository repository)
+        public CovidController(CovidRepository covidRepository, PacienteRepository pacienteRepository)
         {
-            _repository = repository;
+            _covidRepository = covidRepository;
+            _pacienteRepository = pacienteRepository;
         }
 
         public IActionResult Index()
@@ -28,7 +33,22 @@ namespace ProjetoEngSoftII.Controllers.Covid
 
         public IActionResult InserirVacinado()
         {
-            return View();
+            var model = new InserirVacinadoViewModel(_covidRepository.GetAllMarcasVacinaCovid());
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult InserirVacinado(Vacinado vacinado)
+        {
+            if (ModelState.IsValid)
+            {
+                _covidRepository.InserirVacinado(vacinado);
+                return RedirectToAction(nameof(Index));
+            }
+
+            var model = new InserirVacinadoViewModel(_covidRepository.GetAllMarcasVacinaCovid());
+            return View(model);
         }
 
         public IActionResult LeitosIndex()

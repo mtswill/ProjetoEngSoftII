@@ -11,5 +11,6 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         List<MarcaVacinaCovid> GetAllMarcasVacinaCovid();
         MarcaVacinaCovid GetMarcaVacinaCovidById(long id);
         MarcaVacinaCovid GetMarcaVacinaCovidByMarca(string nome);
+        public Vacinado InserirVacinado(Vacinado vacinado);
     }
 }
