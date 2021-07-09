@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoEngSoftII.Repositories.CovidRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace ProjetoEngSoftII.Controllers.Covid
 {
     public class CovidController : Controller
     {
+        private readonly CovidRepository _repository;
+
+        public CovidController(CovidRepository repository)
+        {
+            _repository = repository;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -18,7 +26,7 @@ namespace ProjetoEngSoftII.Controllers.Covid
             return View();
         }
 
-        public IActionResult InserirVacinadoView()
+        public IActionResult InserirVacinado()
         {
             return View();
         }

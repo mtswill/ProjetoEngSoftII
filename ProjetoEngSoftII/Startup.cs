@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProjetoEngSoftII.Data;
 using ProjetoEngSoftII.Repositories;
+using ProjetoEngSoftII.Repositories.CovidRepository;
 using ProjetoEngSoftII.Repositories.PacienteRespository;
 
 namespace ProjetoEngSoftII
@@ -34,6 +35,7 @@ namespace ProjetoEngSoftII
 
             //DI
             services.AddScoped<PacienteRepository>();
+            services.AddScoped<CovidRepository>();
             services.AddScoped<SeedingService>();
         }
 

@@ -1,0 +1,47 @@
+﻿@model ProjetoEngSoftII.Models.Vacinas.Vacinado
+
+@{
+    ViewData["Title"] = "InserirVacinado";
+}
+
+<h1>InserirVacinado</h1>
+
+<h4>Vacinado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="InserirVacinado">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PacienteCpf" class="control-label"></label>
+                <input asp-for="PacienteCpf" class="form-control" />
+                <span asp-validation-for="PacienteCpf" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataVacinacao" class="control-label"></label>
+                <input asp-for="DataVacinacao" class="form-control" />
+                <span asp-validation-for="DataVacinacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarcaVacinaCovidId" class="control-label"></label>
+                <select asp-for="MarcaVacinaCovidId" class ="form-control" asp-items="ViewBag.MarcaVacinaCovidId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Dose" class="control-label"></label>
+                <input asp-for="Dose" class="form-control" />
+                <span asp-validation-for="Dose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
