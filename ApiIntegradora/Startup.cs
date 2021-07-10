@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ProjetoEngSoftII.Data;
+using ProjetoEngSoftII.Repositories.PacienteRespository;
 
 namespace ApiIntegradora
 {
@@ -32,6 +35,12 @@ namespace ApiIntegradora
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiIntegradora", Version = "v1" });
             });
+
+            var connectionString = Configuration.GetConnectionString("ProjectConnectionString");
+            services.AddDbContext<ProjectContext>(options => options.UseNpgsql(connectionString));
+
+            //DI
+            services.AddScoped<PacienteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
