@@ -1,12 +1,36 @@
-﻿var testeCont = document.getElementById("container-info-paciente-inserir-vacinado");
-var txtstart = document.getElementById("txtstart");
+﻿var containerInserirVacinado = document.getElementById("container-inserir-vacinado");
 
-$('#teste-button').on("click", function () {
+
+$('#buscar-cpf-vacinado').on("click", function () {
+
+    var cpf = document.getElementById("cpf-vacinado").value;
 
     if (testeCont.style.display === "none") {
         testeCont.style.display = "block";
         txtstart.value = "teste";
     } else {
         testeCont.style.display = "none";
+    }
+
+});
+
+$('#buscar-cpf-vacinado').on("click", function () {
+
+    var cpf = document.getElementById("cpf-vacinado").value;
+
+    if (testeCont.style.display === "none") {
+        testeCont.style.display = "block";
+        txtstart.value = "teste";
+    } else {
+        testeCont.style.display = "none";
+    }
+
+});
+
+$('#cpf-vacinado').on("keyup", function () {
+    var cpf = document.getElementById("cpf-vacinado").value;
+
+    if (cpf.length > 2) {
+        window.alert("teste");
     }
 });

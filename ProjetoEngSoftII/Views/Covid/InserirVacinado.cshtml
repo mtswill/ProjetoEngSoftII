@@ -17,9 +17,13 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Vacinado.PacienteCpf" class="control-label"></label>
-                <input asp-for="Vacinado.PacienteCpf" class="form-control" />
+                <input asp-for="Vacinado.PacienteCpf" id="cpf-vacinado" class="form-control" />
                 <span asp-validation-for="Vacinado.PacienteCpf" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <button id="buscar-cpf-vacinado"> Buscar CPF </button>
+            </div>
+            <div id="container-inserir-vacinado"></div>
             <div class="form-group">
                 <label asp-for="Vacinado.DataVacinacao" class="control-label"></label>
                 <input asp-for="Vacinado.DataVacinacao" class="form-control" />
@@ -27,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Vacinado.MarcaVacinaCovidId" class="control-label"></label>
-                <select asp-for="Vacinado.MarcaVacinaCovidId" class ="form-control" asp-items="@(new SelectList(Model.MarcasVacinaCovid,"Id", "Marca"))"></select>
+                <select asp-for="Vacinado.MarcaVacinaCovidId" class="form-control" asp-items="@(new SelectList(Model.MarcasVacinaCovid,"Id", "Marca"))"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Vacinado.Dose" class="control-label"></label>
@@ -45,6 +49,9 @@
         <div class="col-md-12" id="container-info-paciente-inserir-vacinado" style="background-color: green; display: none;">
             <input type="text" required name="txtstart" id="txtstart" style="width:150px" value="">
         </div>
+    </div>
+    <div class="col-md-4">
+        <input type="text" id="teste-validacao" />
     </div>
 </div>
 
