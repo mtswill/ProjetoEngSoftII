@@ -34,12 +34,12 @@ namespace ProjetoEngSoftII.Controllers
         public IActionResult Edit(string cpf)
         {
             if (cpf.Equals(null))
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "ID não especificado" });
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "CPF não especificado" });
 
             var paciente = _repository.FindByCpf(cpf);
 
             if (paciente.Equals(null))
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "ID não encontrado" });
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "CPF não encontrado" });
 
             return View(paciente);
         }
@@ -63,11 +63,11 @@ namespace ProjetoEngSoftII.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(long id, Paciente paciente)
+        public IActionResult Edit(string cpf, Paciente paciente)
         {
-            if (id != paciente.Id)
+            if (cpf != paciente.Cpf)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "ID não corresponde" });
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "CPF não corresponde" });
             }
 
             if (ModelState.IsValid)
@@ -93,10 +93,23 @@ namespace ProjetoEngSoftII.Controllers
             return View(paciente);
         }
 
+        public IActionResult Details(string cpf)
+        {
+            if (cpf.Equals(null))
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "CPF não corresponde" });
+
+            var paciente = _repository.FindByCpf(cpf);
+
+            if (paciente.Equals(null))
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "CPF não encontrado" });
+
+            return View(paciente);
+        }
+
         #endregion Cadastros
 
         #region Funções
-        
+
         public bool ExistePaciente(string cpf)
             => _repository.Exists(cpf);
         

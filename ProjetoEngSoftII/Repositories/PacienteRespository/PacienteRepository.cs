@@ -106,7 +106,10 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
             {
                 var endereco = _context.Endereco.SingleOrDefault(e => e.Id.Equals(paciente.EnderecoId));
                 if (!endereco.Equals(null))
+                {
                     paciente.Endereco = endereco;
+                    paciente.EnderecoId = endereco.Id;
+                }
             }
 
             return paciente;
