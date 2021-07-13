@@ -30,7 +30,8 @@ $('#buscar-cpf-vacinado').on("click", function () {
 $('#cpf-vacinado').on("keyup", function (event) {
     var cpf = document.getElementById("cpf-vacinado").value;
     var length = document.getElementById("cpf-vacinado").value.length;
-    var container = document.getElementById("container-inserir-vacinado");
+    var containerInserirVacinado = document.getElementById("container-inserir-vacinado");
+    var containerInformacoesPaciente = document.getElementById("container-informacoes-paciente");
 
     if (event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 46) {
         if (length === 3 || length === 7)
@@ -45,12 +46,37 @@ $('#cpf-vacinado').on("keyup", function (event) {
 
     if (length === 14)
     {        
-        if (container.style.display === "none") {
-            container.style.display = "block";
+        if (containerInserirVacinado.style.display === "none") {
+            containerInserirVacinado.style.display = "block";
+            getInformacoesPaciente(cpf);
         }
     }
     else
     {
-        container.style.display = "none";
+        containerInserirVacinado.style.display = "none";
     }
 });
+
+//function getInformacoesPaciente(cpf) {
+//    $.get('/Covid/GetInformacoesPaciente?cpf=' + cpf, {},
+//        function (data, status) {
+//            if (!data.success) {
+//                alert('User ID is invalid!');
+//            }
+//        });
+//}
+
+function getInformacoesPaciente(cpf) {
+    $.ajax({
+        url: '/Covid/GetInformacoesPaciente?cpf=' + cpf,
+        type: 'GET',
+        contentType: 'application/json;',
+        success: function (valid) {
+            if (valid) {
+                //show that id is valid 
+            } else {
+                //show that id is not valid 
+            }
+        }
+    });
+}

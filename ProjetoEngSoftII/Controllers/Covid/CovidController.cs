@@ -55,5 +55,11 @@ namespace ProjetoEngSoftII.Controllers.Covid
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult GetInformacoesPaciente(string cpf)
+        {
+            return View();
+        }
     }
 }
