@@ -17,11 +17,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Vacinado.PacienteCpf" class="control-label"></label>
-                <input asp-for="Vacinado.PacienteCpf" id="cpf-vacinado" class="form-control" />
+                <input asp-for="Vacinado.PacienteCpf" id="cpf-vacinado" maxlength="14" class="form-control" />
                 <span asp-validation-for="Vacinado.PacienteCpf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <button id="buscar-cpf-vacinado"> Buscar CPF </button>
             </div>
             <div id="container-inserir-vacinado"></div>
             <div class="form-group">

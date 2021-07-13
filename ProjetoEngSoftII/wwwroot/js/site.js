@@ -27,10 +27,20 @@ $('#buscar-cpf-vacinado').on("click", function () {
 
 });
 
-$('#cpf-vacinado').on("keyup", function () {
+$('#cpf-vacinado').on("keyup", function (event) {
     var cpf = document.getElementById("cpf-vacinado").value;
+    var length = document.getElementById("cpf-vacinado").value.length;
 
-    if (cpf.length > 2) {
-        window.alert("teste");
+    if (event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 46) {
+        if (length === 3 || length === 7) {
+            document.getElementById("cpf-vacinado").value = document.getElementById("cpf-vacinado").value + ".";
+        }
+        else if (length === 11) {
+            document.getElementById("cpf-vacinado").value = document.getElementById("cpf-vacinado").value + "-";
+        }
+    }
+
+    if (length === 14) {
+        window.alert("length 14");
     }
 });
