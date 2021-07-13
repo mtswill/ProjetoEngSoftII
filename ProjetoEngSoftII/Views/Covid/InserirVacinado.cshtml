@@ -20,22 +20,23 @@
                 <input asp-for="Vacinado.PacienteCpf" id="cpf-vacinado" maxlength="14" class="form-control" />
                 <span asp-validation-for="Vacinado.PacienteCpf" class="text-danger"></span>
             </div>
-            <div id="container-inserir-vacinado"></div>
-            <div class="form-group">
-                <label asp-for="Vacinado.DataVacinacao" class="control-label"></label>
-                <input asp-for="Vacinado.DataVacinacao" class="form-control" />
-                <span asp-validation-for="Vacinado.DataVacinacao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Vacinado.MarcaVacinaCovidId" class="control-label"></label>
-                <select asp-for="Vacinado.MarcaVacinaCovidId" class="form-control" asp-items="@(new SelectList(Model.MarcasVacinaCovid,"Id", "Marca"))"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Vacinado.Dose" class="control-label"></label>
-                <select asp-for="Vacinado.Dose" class="form-control" asp-items="@(new SelectList(doses))"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div id="container-inserir-vacinado" style="display: none;">
+                <div class="form-group">
+                    <label asp-for="Vacinado.DataVacinacao" class="control-label"></label>
+                    <input asp-for="Vacinado.DataVacinacao" class="form-control" />
+                    <span asp-validation-for="Vacinado.DataVacinacao" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Vacinado.MarcaVacinaCovidId" class="control-label"></label>
+                    <select asp-for="Vacinado.MarcaVacinaCovidId" class="form-control" asp-items="@(new SelectList(Model.MarcasVacinaCovid,"Id", "Marca"))"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Vacinado.Dose" class="control-label"></label>
+                    <select asp-for="Vacinado.Dose" class="form-control" asp-items="@(new SelectList(doses))"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
         </form>
         <div class="form-group">
