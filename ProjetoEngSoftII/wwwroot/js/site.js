@@ -37,9 +37,9 @@ function getInformacoesPaciente(cpf) {
         contentType: 'application/json;',
         success: function () {
             document.getElementById("input-nome-paciente-inserir-vacinado").value = "Matheus";
-            document.getElementById("input-rg-paciente-inserir-vacinado").value = "Teste rg";
-            document.getElementById("input-cpf-paciente-inserir-vacinado").value = "Teste cpf";
-            document.getElementById("input-cns-paciente-inserir-vacinado").value = "teste cns";
+            document.getElementById("input-rg-paciente-inserir-vacinado").value = "52.996.464-8";
+            document.getElementById("input-cpf-paciente-inserir-vacinado").value = "462.604.568-59";
+            document.getElementById("input-cns-paciente-inserir-vacinado").value = "aaaaaaaaaaaaaaa123456";
         },
         error: function () {
             window.alert("teste");
