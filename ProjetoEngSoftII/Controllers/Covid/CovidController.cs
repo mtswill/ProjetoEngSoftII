@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoEngSoftII.Helpers;
 using ProjetoEngSoftII.Models.Vacinas;
 using ProjetoEngSoftII.Models.ViewModels;
 using ProjetoEngSoftII.Repositories.CovidRepository;
@@ -59,7 +60,25 @@ namespace ProjetoEngSoftII.Controllers.Covid
         [HttpGet]
         public IActionResult GetInformacoesPaciente(string cpf)
         {
-            return View();
+            cpf = ProjectHelper.RemovePontoEHifem(cpf);
+            var paciente = _pacienteRepository.FindByCpf(cpf);
+
+            if (paciente == null)
+                return BadRequest();
+
+            var model = new
+            {
+                Valid = true,
+                Paciente = new
+                {
+                    Nome = paciente.Nome,
+                    Cpf = paciente.Cpf,
+                    Rg = paciente.Rg,
+                    Cns = paciente.Cns
+                }
+            };           
+
+            return Ok(model);
         }
     }
 }

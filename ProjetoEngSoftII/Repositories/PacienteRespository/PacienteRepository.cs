@@ -102,7 +102,7 @@ namespace ProjetoEngSoftII.Repositories.PacienteRespository
 
         private Paciente AddEnderecoAoPaciente(Paciente paciente)
         {
-            if (!paciente.Equals(null))
+            if (paciente != null)
             {
                 var endereco = _context.Endereco.SingleOrDefault(e => e.Id.Equals(paciente.EnderecoId));
                 if (!endereco.Equals(null))

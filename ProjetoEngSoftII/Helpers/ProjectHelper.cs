@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace ProjetoEngSoftII.Helpers
 {
-    public class ProjectHelper
+    public static class ProjectHelper
     {
+        public static string RemovePontoEHifem(string obj)
+            => obj.Replace(".", string.Empty).Replace("-", string.Empty);
     }
 }

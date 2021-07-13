@@ -1,33 +1,4 @@
-﻿var containerInserirVacinado = document.getElementById("container-inserir-vacinado");
-
-
-$('#buscar-cpf-vacinado').on("click", function () {
-
-    var cpf = document.getElementById("cpf-vacinado").value;
-
-    if (testeCont.style.display === "none") {
-        testeCont.style.display = "block";
-        txtstart.value = "teste";
-    } else {
-        testeCont.style.display = "none";
-    }
-
-});
-
-$('#buscar-cpf-vacinado').on("click", function () {
-
-    var cpf = document.getElementById("cpf-vacinado").value;
-
-    if (testeCont.style.display === "none") {
-        testeCont.style.display = "block";
-        txtstart.value = "teste";
-    } else {
-        testeCont.style.display = "none";
-    }
-
-});
-
-$('#cpf-vacinado').on("keyup", function (event) {
+﻿$('#cpf-vacinado').on("keyup", function (event) {
     var cpf = document.getElementById("cpf-vacinado").value;
     var length = document.getElementById("cpf-vacinado").value.length;
     var containerInserirVacinado = document.getElementById("container-inserir-vacinado");
@@ -49,34 +20,29 @@ $('#cpf-vacinado').on("keyup", function (event) {
         if (containerInserirVacinado.style.display === "none") {
             containerInserirVacinado.style.display = "block";
             getInformacoesPaciente(cpf);
+            containerInformacoesPaciente.style.display = "block";
         }
     }
     else
     {
         containerInserirVacinado.style.display = "none";
+        containerInformacoesPaciente.style.display = "none";
     }
 });
-
-//function getInformacoesPaciente(cpf) {
-//    $.get('/Covid/GetInformacoesPaciente?cpf=' + cpf, {},
-//        function (data, status) {
-//            if (!data.success) {
-//                alert('User ID is invalid!');
-//            }
-//        });
-//}
 
 function getInformacoesPaciente(cpf) {
     $.ajax({
         url: '/Covid/GetInformacoesPaciente?cpf=' + cpf,
         type: 'GET',
         contentType: 'application/json;',
-        success: function (valid) {
-            if (valid) {
-                //show that id is valid 
-            } else {
-                //show that id is not valid 
-            }
+        success: function () {
+            document.getElementById("input-nome-paciente-inserir-vacinado").value = "Matheus";
+            document.getElementById("input-rg-paciente-inserir-vacinado").value = "Teste rg";
+            document.getElementById("input-cpf-paciente-inserir-vacinado").value = "Teste cpf";
+            document.getElementById("input-cns-paciente-inserir-vacinado").value = "teste cns";
+        },
+        error: function () {
+            window.alert("teste");
         }
     });
 }
