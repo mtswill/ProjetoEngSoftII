@@ -2,6 +2,7 @@
 using PdfSharp.Drawing.Layout;
 using ProjetoEngSoftII.Models.Pdf;
 using System;
+using System.IO;
 using System.Reflection;
 
 namespace ProjetoEngSoftII.Helpers
@@ -23,9 +24,13 @@ namespace ProjetoEngSoftII.Helpers
                 graphics.DrawImage(XImage.FromFile(@"D:\foto.jpg"), 250, 300);
 
                 var nomeArquivo = $"{vacinado.Cpf.RemovePontoEHifem()}.pdf";
-                var path = AppDomain.CurrentDomain.BaseDirectory + @"\Files\" + nomeArquivo;
+                var path = Directory.GetCurrentDirectory() + @"\Files\" + nomeArquivo;
 
-                doc.Save(path);
+                try
+                {
+                    doc.Save(path);
+                }
+                catch { }
             }
         }
     }
