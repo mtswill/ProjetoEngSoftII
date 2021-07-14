@@ -7,7 +7,7 @@ namespace ProjetoEngSoftII.Helpers
 {
     public static class ProjectHelper
     {
-        public static string RemovePontoEHifem(string obj)
+        public static string RemovePontoEHifem(this string obj)
             => obj.Replace(".", string.Empty).Replace("-", string.Empty);
     }
 }

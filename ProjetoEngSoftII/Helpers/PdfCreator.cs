@@ -1,12 +1,14 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
-using System.Diagnostics;
+using ProjetoEngSoftII.Models.Pdf;
+using System;
+using System.Reflection;
 
 namespace ProjetoEngSoftII.Helpers
 {
     public class PdfCreator
     {
-        public void Teste()
+        public void CreatePdf(VacinadoPdfModel vacinado)
         {
             using (var doc = new PdfSharp.Pdf.PdfDocument())
             {
@@ -20,8 +22,10 @@ namespace ProjetoEngSoftII.Helpers
 
                 graphics.DrawImage(XImage.FromFile(@"D:\foto.jpg"), 250, 300);
 
-                doc.Save("arquivo.pdf");
-                Process.Start("arquivo.pdf");
+                var nomeArquivo = $"{vacinado.Cpf.RemovePontoEHifem()}.pdf";
+                var path = AppDomain.CurrentDomain.BaseDirectory + @"\Files\" + nomeArquivo;
+
+                doc.Save(path);
             }
         }
     }

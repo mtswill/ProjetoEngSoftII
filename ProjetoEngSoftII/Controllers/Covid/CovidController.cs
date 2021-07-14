@@ -60,7 +60,7 @@ namespace ProjetoEngSoftII.Controllers.Covid
         [HttpGet]
         public IActionResult GetInformacoesPaciente(string cpf)
         {
-            cpf = ProjectHelper.RemovePontoEHifem(cpf);
+            cpf = cpf.RemovePontoEHifem();
             var paciente = _pacienteRepository.FindByCpf(cpf);
 
             if (paciente == null)
