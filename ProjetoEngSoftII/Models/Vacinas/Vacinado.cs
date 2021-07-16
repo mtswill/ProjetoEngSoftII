@@ -13,14 +13,18 @@ namespace ProjetoEngSoftII.Models.Vacinas
         [ForeignKey("paciente_cpf")]
         public string PacienteCpf { get; set; }
 
-        [Column("data_vacinacao")]
         public DateTime DataVacinacao { get; set; }
 
         [ForeignKey("marca_vacina_covid_id")]
         public long MarcaVacinaCovidId { get; set; }
 
-        [Column("dose")]
         public string Dose { get; set; }
+
+        public string Lote { get; set; }
+
+        public string Vacinador { get; set; }
+
+        public string RegistroProfissional { get; set; }
 
         //Classes externas
         [Display(Name = "Marca da Vacina")]

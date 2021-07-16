@@ -31,7 +31,7 @@ namespace ProjetoEngSoftII.Controllers
                 MarcaVacina = "teste"
             };
 
-            teste.CreatePdf(vacinado);
+            //teste.CreatePdf(vacinado);
             return View();
         }
 
