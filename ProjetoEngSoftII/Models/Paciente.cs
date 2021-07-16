@@ -10,7 +10,6 @@ namespace ProjetoEngSoftII.Models
     [Table("paciente")]
     public class Paciente : Pessoa
     {
-        [Column("cns")]
         [Display(Name = "CNS")]
         public string Cns { get; set; }
     }

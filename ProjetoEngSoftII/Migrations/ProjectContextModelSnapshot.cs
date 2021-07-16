@@ -36,7 +36,7 @@ namespace ProjetoEngSoftII.Migrations
                     b.ToTable("carteira_vacinacao");
                 });
 
-            modelBuilder.Entity("ProjetoEngSoftII.Models.Endereco", b =>
+            modelBuilder.Entity("ProjetoEngSoftII.Models.Enderecos.Endereco", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,16 +79,13 @@ namespace ProjetoEngSoftII.Migrations
             modelBuilder.Entity("ProjetoEngSoftII.Models.Paciente", b =>
                 {
                     b.Property<string>("Cpf")
-                        .HasColumnType("text")
-                        .HasColumnName("cpf");
+                        .HasColumnType("text");
 
                     b.Property<string>("Cns")
-                        .HasColumnType("text")
-                        .HasColumnName("cns");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("data_nascimento");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<long>("EnderecoId")
                         .HasColumnType("bigint");
@@ -97,12 +94,10 @@ namespace ProjetoEngSoftII.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Nome")
-                        .HasColumnType("text")
-                        .HasColumnName("nome");
+                        .HasColumnType("text");
 
                     b.Property<string>("Rg")
-                        .HasColumnType("text")
-                        .HasColumnName("rg");
+                        .HasColumnType("text");
 
                     b.HasKey("Cpf");
 
@@ -140,12 +135,10 @@ namespace ProjetoEngSoftII.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Marca")
-                        .HasColumnType("text")
-                        .HasColumnName("marca");
+                        .HasColumnType("text");
 
                     b.Property<string>("Tipo")
-                        .HasColumnType("text")
-                        .HasColumnName("tipo");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -160,18 +153,22 @@ namespace ProjetoEngSoftII.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<DateTime>("DataVacinacao")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("data_vacinacao");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Dose")
-                        .HasColumnType("text")
-                        .HasColumnName("dose");
+                        .HasColumnType("text");
+
+                    b.Property<string>("Lote")
+                        .HasColumnType("text");
 
                     b.Property<long>("MarcaVacinaCovidId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("PacienteCpf")
                         .HasColumnType("text");
+
+                    b.Property<long>("VacinadorId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -181,7 +178,28 @@ namespace ProjetoEngSoftII.Migrations
                     b.HasIndex("PacienteCpf")
                         .IsUnique();
 
+                    b.HasIndex("VacinadorId")
+                        .IsUnique();
+
                     b.ToTable("vacinado");
+                });
+
+            modelBuilder.Entity("ProjetoEngSoftII.Models.Vacinas.Vacinador", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RegistroProfissional")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vacinador");
                 });
 
             modelBuilder.Entity("ProjetoEngSoftII.Models.CarteiraVacinacao", b =>
@@ -195,7 +213,7 @@ namespace ProjetoEngSoftII.Migrations
 
             modelBuilder.Entity("ProjetoEngSoftII.Models.Paciente", b =>
                 {
-                    b.HasOne("ProjetoEngSoftII.Models.Endereco", "Endereco")
+                    b.HasOne("ProjetoEngSoftII.Models.Enderecos.Endereco", "Endereco")
                         .WithOne()
                         .HasForeignKey("ProjetoEngSoftII.Models.Paciente", "EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -216,9 +234,17 @@ namespace ProjetoEngSoftII.Migrations
                         .WithOne()
                         .HasForeignKey("ProjetoEngSoftII.Models.Vacinas.Vacinado", "PacienteCpf");
 
+                    b.HasOne("ProjetoEngSoftII.Models.Vacinas.Vacinador", "Vacinador")
+                        .WithOne()
+                        .HasForeignKey("ProjetoEngSoftII.Models.Vacinas.Vacinado", "VacinadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("MarcaVacinaCovid");
 
                     b.Navigation("Paciente");
+
+                    b.Navigation("Vacinador");
                 });
 #pragma warning restore 612, 618
         }

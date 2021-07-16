@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProjetoEngSoftII.Models.Vacinas
 {
-    [Table("marca_vacina_covid")]
-    public class MarcaVacinaCovid : BaseEntity
+    [Table("vacinador")]
+    public class Vacinador
     {
-        public string Marca { get; set; }
-        public string Tipo { get; set; }
+        public long Id { get; set; }
+        public string Nome { get; set; }
+        public string RegistroProfissional { get; set; }
     }
 }

@@ -33,8 +33,8 @@ namespace ProjetoEngSoftII.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    marca = table.Column<string>(type: "text", nullable: true),
-                    tipo = table.Column<string>(type: "text", nullable: true)
+                    Marca = table.Column<string>(type: "text", nullable: true),
+                    Tipo = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,20 +56,34 @@ namespace ProjetoEngSoftII.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Vacinador",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nome = table.Column<string>(type: "text", nullable: true),
+                    RegistroProfissional = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vacinador", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "paciente",
                 columns: table => new
                 {
-                    cpf = table.Column<string>(type: "text", nullable: false),
-                    cns = table.Column<string>(type: "text", nullable: true),
+                    Cpf = table.Column<string>(type: "text", nullable: false),
+                    Cns = table.Column<string>(type: "text", nullable: true),
                     Id = table.Column<long>(type: "bigint", nullable: false),
-                    nome = table.Column<string>(type: "text", nullable: true),
-                    data_nascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    rg = table.Column<string>(type: "text", nullable: true),
+                    Nome = table.Column<string>(type: "text", nullable: true),
+                    DataNascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Rg = table.Column<string>(type: "text", nullable: true),
                     EnderecoId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_paciente", x => x.cpf);
+                    table.PrimaryKey("PK_paciente", x => x.Cpf);
                     table.ForeignKey(
                         name: "FK_paciente_endereco_EnderecoId",
                         column: x => x.EnderecoId,
@@ -93,7 +107,7 @@ namespace ProjetoEngSoftII.Migrations
                         name: "FK_carteira_vacinacao_paciente_PacienteCpf",
                         column: x => x.PacienteCpf,
                         principalTable: "paciente",
-                        principalColumn: "cpf",
+                        principalColumn: "Cpf",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -104,9 +118,11 @@ namespace ProjetoEngSoftII.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PacienteCpf = table.Column<string>(type: "text", nullable: true),
-                    data_vacinacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DataVacinacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     MarcaVacinaCovidId = table.Column<long>(type: "bigint", nullable: false),
-                    dose = table.Column<string>(type: "text", nullable: true)
+                    Dose = table.Column<string>(type: "text", nullable: true),
+                    Lote = table.Column<string>(type: "text", nullable: true),
+                    VacinadorId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,8 +137,14 @@ namespace ProjetoEngSoftII.Migrations
                         name: "FK_vacinado_paciente_PacienteCpf",
                         column: x => x.PacienteCpf,
                         principalTable: "paciente",
-                        principalColumn: "cpf",
+                        principalColumn: "Cpf",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_vacinado_Vacinador_VacinadorId",
+                        column: x => x.VacinadorId,
+                        principalTable: "Vacinador",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -147,6 +169,12 @@ namespace ProjetoEngSoftII.Migrations
                 table: "vacinado",
                 column: "PacienteCpf",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_vacinado_VacinadorId",
+                table: "vacinado",
+                column: "VacinadorId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -165,6 +193,9 @@ namespace ProjetoEngSoftII.Migrations
 
             migrationBuilder.DropTable(
                 name: "paciente");
+
+            migrationBuilder.DropTable(
+                name: "Vacinador");
 
             migrationBuilder.DropTable(
                 name: "endereco");

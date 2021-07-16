@@ -26,13 +26,14 @@ namespace ProjetoEngSoftII.Data
             modelBuilder.Entity<CarteiraVacinacao>().HasKey(cv => cv.Id);
             modelBuilder.Entity<CarteiraVacinacao>().HasOne(cv => cv.Paciente);
 
-            modelBuilder.Entity<Vacina>().HasKey(v => v.Id);
-
             modelBuilder.Entity<MarcaVacinaCovid>().HasKey(mv => mv.Id);
 
             modelBuilder.Entity<Vacinado>().HasKey(v => v.Id);
             modelBuilder.Entity<Vacinado>().HasOne(v => v.MarcaVacinaCovid).WithOne();
             modelBuilder.Entity<Vacinado>().HasOne(v => v.Paciente).WithOne();
+            modelBuilder.Entity<Vacinado>().HasOne(v => v.Vacinador).WithOne();
+
+            modelBuilder.Entity<Vacinador>().HasKey(v => v.Id);
         }
 
         public DbSet<Paciente> Paciente { get; set; }

@@ -22,9 +22,8 @@ namespace ProjetoEngSoftII.Models.Vacinas
 
         public string Lote { get; set; }
 
-        public string Vacinador { get; set; }
-
-        public string RegistroProfissional { get; set; }
+        [ForeignKey("VacinadorId")]
+        public long VacinadorId { get; set; }
 
         //Classes externas
         [Display(Name = "Marca da Vacina")]
@@ -32,5 +31,8 @@ namespace ProjetoEngSoftII.Models.Vacinas
 
         [Display(Name = "Paciente")]
         public Paciente Paciente { get; set; }
+
+        [Display(Name = "Vacinador")]
+        public Vacinador Vacinador { get; set; }
     }
 }
