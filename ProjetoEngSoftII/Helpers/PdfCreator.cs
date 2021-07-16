@@ -18,11 +18,13 @@ namespace ProjetoEngSoftII.Helpers
             {
                 var page = doc.AddPage();
                 page.Orientation = PageOrientation.Landscape;
+                page.Height = "524";
+                page.Width = "910";
                 var graphics = XGraphics.FromPdfPage(page);
                 var textFormatter = new XTextFormatter(graphics);
-                var font = new XFont("Verdana", 13, XFontStyle.Regular);
+                var font = new XFont("Verdana", 14, XFontStyle.Bold);
 
-                graphics.DrawImage(XImage.FromFile(pathImagemModelo), 250, 300);
+                graphics.DrawImage(XImage.FromFile(pathImagemModelo), 0, 0);
 
                 textFormatter.Alignment = XParagraphAlignment.Center;
                 textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(0, 50, page.Width, page.Height));
