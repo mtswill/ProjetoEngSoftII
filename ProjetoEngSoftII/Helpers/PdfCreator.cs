@@ -26,8 +26,30 @@ namespace ProjetoEngSoftII.Helpers
 
                 graphics.DrawImage(XImage.FromFile(pathImagemModelo), 0, 0);
 
-                textFormatter.Alignment = XParagraphAlignment.Center;
-                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(-210, 141, page.Width, page.Height));
+                textFormatter.Alignment = XParagraphAlignment.Left;
+
+                //nome
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(130, 141, page.Width, page.Height));
+
+                //unidade - 1a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(145, 213, page.Width, page.Height));
+                //unidade - 2a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(565, 213, page.Width, page.Height));
+
+                //cnes - 1a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(107, 253, page.Width, page.Height));
+                //cnes - 2a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(525, 253, page.Width, page.Height));
+
+                //data - 1a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(107, 296, page.Width, page.Height));
+                //data - 2a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(525, 296, page.Width, page.Height));
+                
+                //lote - 1a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(107, 339, page.Width, page.Height));
+                //lote - 2a dose
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(525, 339, page.Width, page.Height));
 
                 var nomeArquivo = $"{vacinado.Cpf.RemovePontoEHifem()}.pdf";
                 var path = Directory.GetCurrentDirectory() + @"\Files\" + nomeArquivo;
