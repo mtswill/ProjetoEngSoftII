@@ -22,12 +22,12 @@ namespace ProjetoEngSoftII.Helpers
                 page.Width = "910";
                 var graphics = XGraphics.FromPdfPage(page);
                 var textFormatter = new XTextFormatter(graphics);
-                var font = new XFont("Verdana", 14, XFontStyle.Bold);
+                var font = new XFont("Verdana", 18, XFontStyle.Bold);
 
                 graphics.DrawImage(XImage.FromFile(pathImagemModelo), 0, 0);
 
                 textFormatter.Alignment = XParagraphAlignment.Center;
-                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(0, 50, page.Width, page.Height));
+                textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(-210, 141, page.Width, page.Height));
 
                 var nomeArquivo = $"{vacinado.Cpf.RemovePontoEHifem()}.pdf";
                 var path = Directory.GetCurrentDirectory() + @"\Files\" + nomeArquivo;
