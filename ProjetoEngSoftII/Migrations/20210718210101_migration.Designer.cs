@@ -10,7 +10,7 @@ using ProjetoEngSoftII.Data;
 namespace ProjetoEngSoftII.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20210716020334_migration")]
+    [Migration("20210718210101_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,26 +109,6 @@ namespace ProjetoEngSoftII.Migrations
                     b.ToTable("paciente");
                 });
 
-            modelBuilder.Entity("ProjetoEngSoftII.Models.Vacina", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("text")
-                        .HasColumnName("descricao");
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("text")
-                        .HasColumnName("nome");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("vacina");
-                });
-
             modelBuilder.Entity("ProjetoEngSoftII.Models.Vacinas.MarcaVacinaCovid", b =>
                 {
                     b.Property<long>("Id")
@@ -188,7 +168,7 @@ namespace ProjetoEngSoftII.Migrations
 
             modelBuilder.Entity("ProjetoEngSoftII.Models.Vacinas.Vacinador", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<long>("RegistroProfissional")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
@@ -196,12 +176,9 @@ namespace ProjetoEngSoftII.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("text");
 
-                    b.Property<string>("RegistroProfissional")
-                        .HasColumnType("text");
+                    b.HasKey("RegistroProfissional");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Vacinador");
+                    b.ToTable("vacinador");
                 });
 
             modelBuilder.Entity("ProjetoEngSoftII.Models.CarteiraVacinacao", b =>

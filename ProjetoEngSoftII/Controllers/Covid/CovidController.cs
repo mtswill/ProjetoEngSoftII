@@ -37,6 +37,10 @@ namespace ProjetoEngSoftII.Controllers.Covid
             var model = new InserirVacinadoViewModel(_covidRepository.GetAllMarcasVacinaCovid());
             return View(model);
         }
+        public IActionResult CadastrarVacinador()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -45,6 +49,20 @@ namespace ProjetoEngSoftII.Controllers.Covid
             if (ModelState.IsValid)
             {
                 _covidRepository.InserirVacinado(vacinado);
+                return RedirectToAction(nameof(Index));
+            }
+
+            var model = new InserirVacinadoViewModel(_covidRepository.GetAllMarcasVacinaCovid());
+            return View(model);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CadastrarVacinador(Vacinador vacinador)
+        {
+            if (ModelState.IsValid)
+            {
+                _covidRepository.CadastrarVacinador(vacinador);
                 return RedirectToAction(nameof(Index));
             }
 

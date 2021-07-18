@@ -42,31 +42,16 @@ namespace ProjetoEngSoftII.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "vacina",
+                name: "vacinador",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    RegistroProfissional = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    nome = table.Column<string>(type: "text", nullable: true),
-                    descricao = table.Column<string>(type: "text", nullable: true)
+                    Nome = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_vacina", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Vacinador",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nome = table.Column<string>(type: "text", nullable: true),
-                    RegistroProfissional = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vacinador", x => x.Id);
+                    table.PrimaryKey("PK_vacinador", x => x.RegistroProfissional);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,10 +125,10 @@ namespace ProjetoEngSoftII.Migrations
                         principalColumn: "Cpf",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_vacinado_Vacinador_VacinadorId",
+                        name: "FK_vacinado_vacinador_VacinadorId",
                         column: x => x.VacinadorId,
-                        principalTable: "Vacinador",
-                        principalColumn: "Id",
+                        principalTable: "vacinador",
+                        principalColumn: "RegistroProfissional",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -183,9 +168,6 @@ namespace ProjetoEngSoftII.Migrations
                 name: "carteira_vacinacao");
 
             migrationBuilder.DropTable(
-                name: "vacina");
-
-            migrationBuilder.DropTable(
                 name: "vacinado");
 
             migrationBuilder.DropTable(
@@ -195,7 +177,7 @@ namespace ProjetoEngSoftII.Migrations
                 name: "paciente");
 
             migrationBuilder.DropTable(
-                name: "Vacinador");
+                name: "vacinador");
 
             migrationBuilder.DropTable(
                 name: "endereco");

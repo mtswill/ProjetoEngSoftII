@@ -30,6 +30,21 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
                 throw;
             }
         }
+        
+        public Vacinador CadastrarVacinador(Vacinador vacinador)
+        {
+            try
+            {
+                _context.Vacinador.Add(vacinador);
+                _context.SaveChanges();
+
+                return vacinador;
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
         public List<MarcaVacinaCovid> GetAllMarcasVacinaCovid()
             => _context.MarcaVacinaCovid.ToList();
