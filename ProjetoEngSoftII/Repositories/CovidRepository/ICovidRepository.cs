@@ -17,5 +17,6 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         public void RemoverVacinador(string registroProfissional);
         public List<Vacinador> GetAllVacinadores();
         public Vacinador GetVacinadorByRegistro(string registroProfissional);
+        public bool ExisteVacinador(string registroProfissional);
     }
 }

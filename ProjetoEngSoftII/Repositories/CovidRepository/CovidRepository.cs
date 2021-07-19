@@ -90,6 +90,9 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
             }
         }
 
+        public bool ExisteVacinador(string registroProfissional)
+            => _context.Vacinador.Any(v => v.RegistroProfissional.Equals(registroProfissional));
+
         public List<MarcaVacinaCovid> GetAllMarcasVacinaCovid()
             => _context.MarcaVacinaCovid.ToList();
 

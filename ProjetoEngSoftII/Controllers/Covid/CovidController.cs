@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoEngSoftII.Helpers;
+using ProjetoEngSoftII.Models;
 using ProjetoEngSoftII.Models.Vacinas;
 using ProjetoEngSoftII.Models.ViewModels;
 using ProjetoEngSoftII.Repositories.CovidRepository;
@@ -75,7 +76,78 @@ namespace ProjetoEngSoftII.Controllers.Covid
             var model = _covidRepository.GetAllVacinadores();
             return View(model);
         }
+
+        public IActionResult EditarVacinador(string registroProfissional)
+        {
+            if (registroProfissional == null)
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não especificado" });
+
+            var vacinador = _covidRepository.GetVacinadorByRegistro(registroProfissional);
+
+            if (vacinador == null)
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não encontrado" });
+
+            return View(vacinador);
+        }
         
+        public IActionResult DeletarVacinador(string registroProfissional)
+        {
+            if (registroProfissional == null)
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não especificado" });
+
+            var vacinador = _covidRepository.GetVacinadorByRegistro(registroProfissional);
+
+            if (vacinador == null)
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não encontrado" });
+
+            return View(vacinador);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditarVacinador(Vacinador vacinador)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _covidRepository.UpdateVacinador(vacinador);
+                }
+                catch (Exception ex)
+                {
+                    if (!(_covidRepository.ExisteVacinador(vacinador.RegistroProfissional.ToString())))
+                    {
+                        return RedirectToAction(nameof(ErrorViewModel), new { message = ex.Message });
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            return RedirectToAction(nameof(IndexVacinadores));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletarRegistroVacinador(string registroProfissional)
+        {
+            if (string.IsNullOrWhiteSpace(registroProfissional))
+            {
+                try
+                {
+                    _covidRepository.RemoverVacinador(registroProfissional);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction(nameof(IndexVacinadores));
+        }
+
         public IActionResult LeitosIndex()
         {
             return View();
