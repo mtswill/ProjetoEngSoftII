@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ProjetoEngSoftII.Models.Vacinas.Vacinador>
+
+@{
+    ViewData["Title"] = "Vacinadores";
+}
+
+<h1>Vacinadores</h1>
+
+<p>
+    <a asp-action="CadastrarVacinador">Cadastrar vacinador</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistroProfissional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistroProfissional)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RegistroProfissional">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.RegistroProfissional">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.RegistroProfissional">Remover</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

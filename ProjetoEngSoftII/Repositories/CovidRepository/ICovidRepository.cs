@@ -12,5 +12,10 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         MarcaVacinaCovid GetMarcaVacinaCovidById(long id);
         MarcaVacinaCovid GetMarcaVacinaCovidByMarca(string nome);
         public Vacinado InserirVacinado(Vacinado vacinado);
+        public Vacinador CadastrarVacinador(Vacinador vacinador);
+        public Vacinador UpdateVacinador(Vacinador vacinador);
+        public void RemoverVacinador(string registroProfissional);
+        public List<Vacinador> GetAllVacinadores();
+        public Vacinador GetVacinadorByRegistro(string registroProfissional);
     }
 }

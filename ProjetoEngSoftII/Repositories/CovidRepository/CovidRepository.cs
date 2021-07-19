@@ -33,6 +33,9 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         
         public Vacinador CadastrarVacinador(Vacinador vacinador)
         {
+            if (_context.Vacinador.Any(v => v.RegistroProfissional.Equals(vacinador.RegistroProfissional)))
+                return vacinador;
+
             try
             {
                 _context.Vacinador.Add(vacinador);
@@ -45,6 +48,47 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
                 throw;
             }
         }
+        
+        public Vacinador UpdateVacinador(Vacinador vacinador)
+        {
+            var result = _context.Vacinador.SingleOrDefault(v => v.RegistroProfissional.Equals(vacinador.RegistroProfissional));
+
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(vacinador);
+                    _context.SaveChanges();
+                    return result;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void RemoverVacinador(string registroProfissional)
+        {
+            var result = _context.Vacinador.SingleOrDefault(v => v.RegistroProfissional.Equals(registroProfissional));
+
+            if (result != null)
+            {
+                try
+                {
+                    _context.Vacinador.Remove(result);
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
 
         public List<MarcaVacinaCovid> GetAllMarcasVacinaCovid()
             => _context.MarcaVacinaCovid.ToList();
@@ -54,5 +98,11 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
 
         public MarcaVacinaCovid GetMarcaVacinaCovidByMarca(string nome)
             => _context.MarcaVacinaCovid.FirstOrDefault(mv => mv.Marca.Contains(nome));
+
+        public List<Vacinador> GetAllVacinadores()
+            => _context.Vacinador.ToList();
+        
+        public Vacinador GetVacinadorByRegistro(string registroProfissional)
+            => _context.Vacinador.FirstOrDefault(v => v.RegistroProfissional.Equals(registroProfissional));
     }
 }

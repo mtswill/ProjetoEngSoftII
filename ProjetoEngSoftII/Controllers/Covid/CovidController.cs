@@ -63,13 +63,19 @@ namespace ProjetoEngSoftII.Controllers.Covid
             if (ModelState.IsValid)
             {
                 _covidRepository.CadastrarVacinador(vacinador);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CadastrarVacinador));
             }
 
             var model = new InserirVacinadoViewModel(_covidRepository.GetAllMarcasVacinaCovid());
             return View(model);
         }
 
+        public IActionResult IndexVacinadores()
+        {
+            var model = _covidRepository.GetAllVacinadores();
+            return View(model);
+        }
+        
         public IActionResult LeitosIndex()
         {
             return View();
