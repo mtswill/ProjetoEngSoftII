@@ -47,9 +47,10 @@ namespace ProjetoEngSoftII.Controllers.Covid
         [ValidateAntiForgeryToken]
         public IActionResult InserirVacinado(Vacinado vacinado)
         {
+
             if (ModelState.IsValid)
             {
-                _covidRepository.InserirVacinado(vacinado);
+                _covidRepository.InserirVacinado(TrataVacinado(vacinado));
                 return RedirectToAction(nameof(Index));
             }
 
@@ -71,6 +72,20 @@ namespace ProjetoEngSoftII.Controllers.Covid
             return View(model);
         }
 
+        public IActionResult IndexVacinados()
+        {
+            var model = _covidRepository.GetAllVacinados();
+
+            foreach (var item in model)
+            {
+                item.MarcaVacinaCovid = _covidRepository.GetMarcaVacinaCovidById(item.MarcaVacinaCovidId);
+                item.Paciente = _pacienteRepository.FindByCpf(item.PacienteCpf);
+                item.Vacinador = _covidRepository.GetVacinadorByRegistro(item.VacinadorRegistroProfissional);
+            }
+
+            return View(model);
+        }
+        
         public IActionResult IndexVacinadores()
         {
             var model = _covidRepository.GetAllVacinadores();
@@ -178,6 +193,12 @@ namespace ProjetoEngSoftII.Controllers.Covid
             };           
 
             return Ok(model);
+        }
+
+        public Vacinado TrataVacinado(Vacinado vacinado)
+        {
+            vacinado.PacienteCpf = vacinado.PacienteCpf.RemovePontoEHifem();
+            return vacinado;
         }
     }
 }

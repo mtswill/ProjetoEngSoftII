@@ -102,6 +102,9 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         public MarcaVacinaCovid GetMarcaVacinaCovidByMarca(string nome)
             => _context.MarcaVacinaCovid.FirstOrDefault(mv => mv.Marca.Contains(nome));
 
+        public List<Vacinado> GetAllVacinados()
+            => _context.Vacinado.ToList();
+        
         public List<Vacinador> GetAllVacinadores()
             => _context.Vacinador.ToList();
         

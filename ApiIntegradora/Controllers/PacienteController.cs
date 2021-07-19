@@ -25,39 +25,42 @@ namespace ApiIntegradora.Controllers
         [HttpGet("{cpf}")]
         public IActionResult Get(string cpf)
         {
-            if (string.IsNullOrWhiteSpace(cpf))
-                return BadRequest();
+            //if (string.IsNullOrWhiteSpace(cpf))
+            //    return BadRequest();
 
-            var paciente = _pacienteRepository.FindByCpf(cpf);
+            //var paciente = _pacienteRepository.FindByCpf(cpf);
 
-            if (paciente == null)
-                return NotFound();
+            //if (paciente == null)
+            //    return NotFound();
 
-            return Ok(paciente);
+            //return Ok(paciente);
+            return StatusCode(501);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] Paciente paciente)
         {
-            if (paciente == null)
-                return BadRequest();
+            //if (paciente == null)
+            //    return BadRequest();
 
-            return Ok(_pacienteRepository.Create(paciente));
+            //return Ok(_pacienteRepository.Create(paciente));
+            return StatusCode(501);
         }
 
         [HttpPut]
         public IActionResult Put([FromBody] Paciente paciente)
         {
-            if (paciente == null)
-                return BadRequest();
+            //if (paciente == null)
+            //    return BadRequest();
 
-            return Ok(_pacienteRepository.Update(paciente));
+            //return Ok(_pacienteRepository.Update(paciente));
+            return StatusCode(501);
         }
 
         [HttpDelete]
         public IActionResult Delete()
         {
-            return BadRequest(new NotImplementedException());
+            return StatusCode(501);
         }
     }
 }

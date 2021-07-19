@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjetoEngSoftII.Models.Vacinas.Vacinado>
+
+@{
+    ViewData["Title"] = "IndexVacinados";
+}
+
+<h1>IndexVacinados</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataVacinacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dose)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lote)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarcaVacinaCovid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Paciente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacinador)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVacinacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarcaVacinaCovid.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paciente.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vacinador.Nome)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

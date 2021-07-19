@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ProjetoEngSoftII.Migrations
 {
-    public partial class migration : Migration
+    public partial class mig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -104,10 +104,11 @@ namespace ProjetoEngSoftII.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PacienteCpf = table.Column<string>(type: "text", nullable: true),
                     DataVacinacao = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DataPrevisaoSegundaDose = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     MarcaVacinaCovidId = table.Column<long>(type: "bigint", nullable: false),
                     Dose = table.Column<string>(type: "text", nullable: true),
                     Lote = table.Column<string>(type: "text", nullable: true),
-                    VacinadorId = table.Column<long>(type: "bigint", nullable: false)
+                    VacinadorRegistroProfissional = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,8 +126,8 @@ namespace ProjetoEngSoftII.Migrations
                         principalColumn: "Cpf",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_vacinado_vacinador_VacinadorId",
-                        column: x => x.VacinadorId,
+                        name: "FK_vacinado_vacinador_VacinadorRegistroProfissional",
+                        column: x => x.VacinadorRegistroProfissional,
                         principalTable: "vacinador",
                         principalColumn: "RegistroProfissional",
                         onDelete: ReferentialAction.Cascade);
@@ -156,9 +157,9 @@ namespace ProjetoEngSoftII.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_vacinado_VacinadorId",
+                name: "IX_vacinado_VacinadorRegistroProfissional",
                 table: "vacinado",
-                column: "VacinadorId",
+                column: "VacinadorRegistroProfissional",
                 unique: true);
         }
 

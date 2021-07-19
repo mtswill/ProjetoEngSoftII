@@ -132,6 +132,9 @@ namespace ProjetoEngSoftII.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<DateTime?>("DataPrevisaoSegundaDose")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<DateTime>("DataVacinacao")
                         .HasColumnType("timestamp without time zone");
 
@@ -147,7 +150,7 @@ namespace ProjetoEngSoftII.Migrations
                     b.Property<string>("PacienteCpf")
                         .HasColumnType("text");
 
-                    b.Property<long>("VacinadorId")
+                    b.Property<long>("VacinadorRegistroProfissional")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -158,7 +161,7 @@ namespace ProjetoEngSoftII.Migrations
                     b.HasIndex("PacienteCpf")
                         .IsUnique();
 
-                    b.HasIndex("VacinadorId")
+                    b.HasIndex("VacinadorRegistroProfissional")
                         .IsUnique();
 
                     b.ToTable("vacinado");
@@ -213,7 +216,7 @@ namespace ProjetoEngSoftII.Migrations
 
                     b.HasOne("ProjetoEngSoftII.Models.Vacinas.Vacinador", "Vacinador")
                         .WithOne()
-                        .HasForeignKey("ProjetoEngSoftII.Models.Vacinas.Vacinado", "VacinadorId")
+                        .HasForeignKey("ProjetoEngSoftII.Models.Vacinas.Vacinado", "VacinadorRegistroProfissional")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
