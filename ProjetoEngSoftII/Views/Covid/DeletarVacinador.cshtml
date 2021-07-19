@@ -14,18 +14,18 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RegistroProfissional)
         </dt>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.RegistroProfissional)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome)
         </dd>
     </dl>
 
-    <form asp-action="DeletarVacinador">
+    <form asp-action="DeletarRegistroVacinador">
         <input type="hidden" asp-for="RegistroProfissional" />
         <input type="submit" value="Deletar" class="btn btn-danger" /> |
         <a asp-action="IndexVacinadores">Voltar</a>

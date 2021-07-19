@@ -14,9 +14,9 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         public Vacinado InserirVacinado(Vacinado vacinado);
         public Vacinador CadastrarVacinador(Vacinador vacinador);
         public Vacinador UpdateVacinador(Vacinador vacinador);
-        public void RemoverVacinador(string registroProfissional);
+        public void RemoverVacinador(long registroProfissional);
         public List<Vacinador> GetAllVacinadores();
-        public Vacinador GetVacinadorByRegistro(string registroProfissional);
-        public bool ExisteVacinador(string registroProfissional);
+        public Vacinador GetVacinadorByRegistro(long registroProfissional);
+        public bool ExisteVacinador(long registroProfissional);
     }
 }

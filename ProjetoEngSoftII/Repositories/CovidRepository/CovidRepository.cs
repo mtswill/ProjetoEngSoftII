@@ -72,7 +72,7 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
             }
         }
 
-        public void RemoverVacinador(string registroProfissional)
+        public void RemoverVacinador(long registroProfissional)
         {
             var result = _context.Vacinador.SingleOrDefault(v => v.RegistroProfissional.Equals(registroProfissional));
 
@@ -90,7 +90,7 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
             }
         }
 
-        public bool ExisteVacinador(string registroProfissional)
+        public bool ExisteVacinador(long registroProfissional)
             => _context.Vacinador.Any(v => v.RegistroProfissional.Equals(registroProfissional));
 
         public List<MarcaVacinaCovid> GetAllMarcasVacinaCovid()
@@ -105,7 +105,7 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         public List<Vacinador> GetAllVacinadores()
             => _context.Vacinador.ToList();
         
-        public Vacinador GetVacinadorByRegistro(string registroProfissional)
+        public Vacinador GetVacinadorByRegistro(long registroProfissional)
             => _context.Vacinador.FirstOrDefault(v => v.RegistroProfissional.Equals(registroProfissional));
     }
 }

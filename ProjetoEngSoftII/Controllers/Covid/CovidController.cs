@@ -64,7 +64,7 @@ namespace ProjetoEngSoftII.Controllers.Covid
             if (ModelState.IsValid)
             {
                 _covidRepository.CadastrarVacinador(vacinador);
-                return RedirectToAction(nameof(CadastrarVacinador));
+                return RedirectToAction(nameof(IndexVacinadores));
             }
 
             var model = new InserirVacinadoViewModel(_covidRepository.GetAllMarcasVacinaCovid());
@@ -82,7 +82,8 @@ namespace ProjetoEngSoftII.Controllers.Covid
             if (registroProfissional == null)
                 return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não especificado" });
 
-            var vacinador = _covidRepository.GetVacinadorByRegistro(registroProfissional);
+            long.TryParse(registroProfissional, out long registro);
+            var vacinador = _covidRepository.GetVacinadorByRegistro(registro);
 
             if (vacinador == null)
                 return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não encontrado" });
@@ -95,7 +96,8 @@ namespace ProjetoEngSoftII.Controllers.Covid
             if (registroProfissional == null)
                 return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não especificado" });
 
-            var vacinador = _covidRepository.GetVacinadorByRegistro(registroProfissional);
+            long.TryParse(registroProfissional, out long registro);
+            var vacinador = _covidRepository.GetVacinadorByRegistro(registro);
 
             if (vacinador == null)
                 return RedirectToAction(nameof(ErrorViewModel), new { message = "Registro profissional não encontrado" });
@@ -115,7 +117,7 @@ namespace ProjetoEngSoftII.Controllers.Covid
                 }
                 catch (Exception ex)
                 {
-                    if (!(_covidRepository.ExisteVacinador(vacinador.RegistroProfissional.ToString())))
+                    if (!(_covidRepository.ExisteVacinador(vacinador.RegistroProfissional)))
                     {
                         return RedirectToAction(nameof(ErrorViewModel), new { message = ex.Message });
                     }
@@ -133,13 +135,14 @@ namespace ProjetoEngSoftII.Controllers.Covid
         [ValidateAntiForgeryToken]
         public IActionResult DeletarRegistroVacinador(string registroProfissional)
         {
-            if (string.IsNullOrWhiteSpace(registroProfissional))
+            if (!string.IsNullOrWhiteSpace(registroProfissional))
             {
                 try
                 {
-                    _covidRepository.RemoverVacinador(registroProfissional);
+                    long.TryParse(registroProfissional, out long registro);
+                    _covidRepository.RemoverVacinador(registro);
                 }
-                catch (Exception ex)
+                catch
                 {
                     throw;
                 }
