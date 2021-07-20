@@ -25,6 +25,8 @@ namespace ProjetoEngSoftII.Models.Vacinas
 
         public string Dose { get; set; }
 
+        public string Unidade { get; set; }
+
         public string Lote { get; set; }
 
         [ForeignKey("VacinadorRegistroProfissional")]

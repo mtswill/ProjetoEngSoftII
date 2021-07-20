@@ -29,9 +29,9 @@ namespace ProjetoEngSoftII.Data
             modelBuilder.Entity<MarcaVacinaCovid>().HasKey(mv => mv.Id);
 
             modelBuilder.Entity<Vacinado>().HasKey(v => v.Id);
-            modelBuilder.Entity<Vacinado>().HasOne(v => v.MarcaVacinaCovid).WithOne();
-            modelBuilder.Entity<Vacinado>().HasOne(v => v.Paciente).WithOne();
-            modelBuilder.Entity<Vacinado>().HasOne(v => v.Vacinador).WithOne();
+            modelBuilder.Entity<Vacinado>().HasOne(v => v.MarcaVacinaCovid);
+            modelBuilder.Entity<Vacinado>().HasOne(v => v.Paciente);
+            modelBuilder.Entity<Vacinado>().HasOne(v => v.Vacinador);
 
             modelBuilder.Entity<Vacinador>().HasKey(v => v.RegistroProfissional);
         }

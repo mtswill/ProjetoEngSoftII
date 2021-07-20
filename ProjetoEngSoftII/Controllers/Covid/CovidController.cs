@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetoEngSoftII.Helpers;
 using ProjetoEngSoftII.Models;
+using ProjetoEngSoftII.Models.Pdf;
 using ProjetoEngSoftII.Models.Vacinas;
 using ProjetoEngSoftII.Models.ViewModels;
 using ProjetoEngSoftII.Repositories.CovidRepository;
@@ -47,7 +48,6 @@ namespace ProjetoEngSoftII.Controllers.Covid
         [ValidateAntiForgeryToken]
         public IActionResult InserirVacinado(Vacinado vacinado)
         {
-
             if (ModelState.IsValid)
             {
                 _covidRepository.InserirVacinado(TrataVacinado(vacinado));
@@ -193,6 +193,35 @@ namespace ProjetoEngSoftII.Controllers.Covid
             };           
 
             return Ok(model);
+        }
+
+        public IActionResult EmitirCarteiraVacinacaoCovid(string cpf)
+        {
+            var carteiraVacinacao = new PdfCreator();
+            var vacinado = _covidRepository.GetVacinadoByCpf(cpf);
+
+            if (vacinado == null)
+                return View();
+
+            vacinado.Paciente = _pacienteRepository.FindByCpf(cpf);
+            vacinado.MarcaVacinaCovid = _covidRepository.GetMarcaVacinaCovidById(vacinado.MarcaVacinaCovidId);
+            vacinado.Vacinador = _covidRepository.GetVacinadorByRegistro(vacinado.VacinadorRegistroProfissional);
+
+            var vacinadoModel = new VacinadoPdfModel(vacinado.PacienteCpf,
+                                                     vacinado.Paciente.Nome,
+                                                     vacinado.Dose,
+                                                     vacinado.MarcaVacinaCovid.Marca,
+                                                     vacinado.Unidade,
+                                                     vacinado.Vacinador.Nome,
+                                                     vacinado.Lote,
+                                                     vacinado.Vacinador.RegistroProfissional.ToString(),
+                                                     vacinado.Paciente.Cns,
+                                                     vacinado.DataVacinacao,
+                                                     vacinado.DataPrevisaoSegundaDose);
+
+            carteiraVacinacao.CreatePdf(vacinadoModel);
+
+            return View();
         }
 
         public Vacinado TrataVacinado(Vacinado vacinado)

@@ -110,5 +110,8 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         
         public Vacinador GetVacinadorByRegistro(long registroProfissional)
             => _context.Vacinador.FirstOrDefault(v => v.RegistroProfissional.Equals(registroProfissional));
+
+        public Vacinado GetVacinadoByCpf(string cpf)
+            => _context.Vacinado.FirstOrDefault(v => v.PacienteCpf.Equals(cpf));
     }
 }

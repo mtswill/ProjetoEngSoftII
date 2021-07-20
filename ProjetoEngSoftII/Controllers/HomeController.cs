@@ -20,18 +20,6 @@ namespace ProjetoEngSoftII.Controllers
 
         public IActionResult Index()
         {
-            var teste = new PdfCreator();
-            var vacinado = new VacinadoPdfModel
-            {
-                Cpf = "462.604.568-59",
-                Nome = "Matheus Willian Polato",
-                DataVacinacao = DateTime.Now,
-                DataRetorno = DateTime.Now,
-                Dose = Doses.PrimeiraDose.ToString(),
-                MarcaVacina = "teste"
-            };
-
-            //teste.CreatePdf(vacinado);
             return View();
         }
 

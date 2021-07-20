@@ -18,6 +18,7 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
         public List<Vacinado> GetAllVacinados();
         public List<Vacinador> GetAllVacinadores();
         public Vacinador GetVacinadorByRegistro(long registroProfissional);
+        public Vacinado GetVacinadoByCpf(string cpf);
         public bool ExisteVacinador(long registroProfissional);
     }
 }

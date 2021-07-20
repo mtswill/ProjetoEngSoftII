@@ -3,6 +3,7 @@ using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using ProjetoEngSoftII.Models.Pdf;
+using ProjetoEngSoftII.Models.Vacinas;
 using System;
 using System.IO;
 using System.Reflection;
@@ -32,8 +33,13 @@ namespace ProjetoEngSoftII.Helpers
 
                 //nome
                 textFormatter.DrawString(vacinado.Nome, fontNome, XBrushes.Black, new XRect(130, 141, page.Width, page.Height));
-                textFormatter = PrintaPrimeiraDose(textFormatter, fontInfo, page, vacinado);
-                textFormatter = PrintaSegundaDose(textFormatter, fontInfo, page, vacinado);
+
+                if (vacinado.Dose.Equals(Doses.PrimeiraDose))
+                {
+                    textFormatter = PrintaPrimeiraDose(textFormatter, fontInfo, page, vacinado);
+                }
+                else
+                    textFormatter = PrintaSegundaDose(textFormatter, fontInfo, page, vacinado);
 
                 var nomeArquivo = $"{vacinado.Cpf.RemovePontoEHifem()}.pdf";
                 var path = Directory.GetCurrentDirectory() + @"\Files\" + nomeArquivo;
@@ -49,25 +55,25 @@ namespace ProjetoEngSoftII.Helpers
         private XTextFormatter PrintaPrimeiraDose(XTextFormatter textFormatter, XFont font, PdfPage page, VacinadoPdfModel vacinado)
         {
             //unidade - 1a dose
-            textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(145, 213, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.Unidade, font, XBrushes.Black, new XRect(145, 213, page.Width, page.Height));
 
             //cnes - 1a dose
-            textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(107, 253, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.Cnes, font, XBrushes.Black, new XRect(107, 253, page.Width, page.Height));
 
             //data - 1a dose
-            textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(107, 296, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.DataVacinacao.ToString(), font, XBrushes.Black, new XRect(107, 296, page.Width, page.Height));
 
             //lote - 1a dose
-            textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(107, 339, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.Lote, font, XBrushes.Black, new XRect(107, 339, page.Width, page.Height));
             
             //fabricante - 1a dose
-            textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(180, 382, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.MarcaVacina, font, XBrushes.Black, new XRect(180, 382, page.Width, page.Height));
             
             //vacinador - 1a dose
-            textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(175, 425, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.Vacinador, font, XBrushes.Black, new XRect(175, 425, page.Width, page.Height));
             
             //reg prof - 1a dose
-            textFormatter.DrawString(vacinado.Nome, font, XBrushes.Black, new XRect(165, 468, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.RegistroProfissional, font, XBrushes.Black, new XRect(165, 468, page.Width, page.Height));
             
             return textFormatter;
         }
