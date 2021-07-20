@@ -7,7 +7,7 @@ namespace ProjetoEngSoftII.Models.Pdf
 {
     public class VacinadoPdfModel
     {
-        public VacinadoPdfModel(string cpf, string nome, string dose, string marcaVacina, string unidade, string vacinador, string lote, string registroProfissional, string cnes, DateTime dataVacinacao, DateTime? dataRetorno)
+        public VacinadoPdfModel(string cpf, string nome, string dose, string marcaVacina, string unidade, string vacinador, string lote, string registroProfissional, string cnes, DateTime dataVacinacao, DateTime dataRetorno)
         {
             Cpf = cpf;
             Nome = nome;
@@ -32,6 +32,6 @@ namespace ProjetoEngSoftII.Models.Pdf
         public string Cnes { get; set; }
         public string RegistroProfissional { get; set; }
         public DateTime DataVacinacao { get; set; }
-        public DateTime? DataRetorno { get; set; }
+        public DateTime DataRetorno { get; set; }
     }
 }

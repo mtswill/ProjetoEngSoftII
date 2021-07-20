@@ -31,43 +31,50 @@ namespace ProjetoEngSoftII.Data
             var pfizer = new MarcaVacinaCovid
             {
                 Marca = "Pfizer-BioNTech",
-                Tipo = "mRNA"
+                Tipo = "mRNA",
+                DiasParaSegundaDose = 90
             };
 
             var moderna = new MarcaVacinaCovid
             {
                 Marca = "Moderna",
-                Tipo = "mRNA"
+                Tipo = "mRNA",
+                DiasParaSegundaDose = 42
             };
 
             var sputnik = new MarcaVacinaCovid
             {
                 Marca = "Sputnik V",
-                Tipo = "Adenovírus"
+                Tipo = "Adenovírus",
+                DiasParaSegundaDose = 21
             };
 
             var oxford = new MarcaVacinaCovid
             {
                 Marca = "Oxford-AstraZeneca",
-                Tipo = "Adenovírus"
+                Tipo = "Adenovírus",
+                DiasParaSegundaDose = 14
             };
 
             var covishield = new MarcaVacinaCovid
             {
                 Marca = "Covidshield",
-                Tipo = "Adenovírus"
+                Tipo = "Adenovírus",
+                DiasParaSegundaDose = 90
             };
 
             var janssen = new MarcaVacinaCovid
             {
                 Marca = "Janssen",
-                Tipo = "Adenovírus"
+                Tipo = "Adenovírus",
+                DiasParaSegundaDose = 0
             };
 
             var cansino = new MarcaVacinaCovid
             {
                 Marca = "Cansino",
-                Tipo = "Adenovírus"
+                Tipo = "Adenovírus",
+                DiasParaSegundaDose = 0
             };
 
             _context.MarcaVacinaCovid.AddRange(pfizer, moderna, sputnik, oxford, covishield, janssen, cansino);

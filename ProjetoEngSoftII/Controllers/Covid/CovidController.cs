@@ -50,6 +50,7 @@ namespace ProjetoEngSoftII.Controllers.Covid
         {
             if (ModelState.IsValid)
             {
+                vacinado.DataPrevisaoSegundaDose = vacinado.DataVacinacao.AddDays(_covidRepository.GetMarcaVacinaCovidById(vacinado.MarcaVacinaCovidId).DiasParaSegundaDose);
                 _covidRepository.InserirVacinado(TrataVacinado(vacinado));
                 return RedirectToAction(nameof(Index));
             }

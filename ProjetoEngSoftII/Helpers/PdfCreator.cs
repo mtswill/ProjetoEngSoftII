@@ -74,7 +74,10 @@ namespace ProjetoEngSoftII.Helpers
             
             //reg prof - 1a dose
             textFormatter.DrawString(vacinado.RegistroProfissional, font, XBrushes.Black, new XRect(165, 468, page.Width, page.Height));
-            
+
+            //data - 2a dose
+            textFormatter.DrawString("A partir de " + vacinado.DataRetorno.ToString("dd/MM/yyyy"), font, XBrushes.Black, new XRect(525, 296, page.Width, page.Height));
+
             return textFormatter;
         }
         

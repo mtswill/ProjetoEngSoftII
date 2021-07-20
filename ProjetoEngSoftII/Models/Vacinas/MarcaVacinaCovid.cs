@@ -11,5 +11,6 @@ namespace ProjetoEngSoftII.Models.Vacinas
     {
         public string Marca { get; set; }
         public string Tipo { get; set; }
+        public int DiasParaSegundaDose { get; set; }
     }
 }
