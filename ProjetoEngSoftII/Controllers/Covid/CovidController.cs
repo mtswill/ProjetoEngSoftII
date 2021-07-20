@@ -51,8 +51,7 @@ namespace ProjetoEngSoftII.Controllers.Covid
         {
             if (ModelState.IsValid)
             {
-                vacinado.DataPrevisaoSegundaDose = vacinado.DataVacinacao.AddDays(_covidRepository.GetMarcaVacinaCovidById(vacinado.MarcaVacinaCovidId).DiasParaSegundaDose);
-                _covidRepository.InserirVacinado(TrataVacinado(vacinado));
+                _covidRepository.InserirVacinado(ProcessaVacinado(vacinado));
                 return RedirectToAction(nameof(Index));
             }
 
@@ -182,6 +181,16 @@ namespace ProjetoEngSoftII.Controllers.Covid
             if (paciente == null)
                 return BadRequest();
 
+            var vacinado = _covidRepository.GetVacinadoByCpf(cpf);
+            var marcaVacinaId = string.Empty;
+            var tomouPrimeraDose = false;
+
+            if (vacinado != null)
+            {
+                tomouPrimeraDose = true;
+                marcaVacinaId = vacinado.MarcaVacinaCovidId.ToString();
+            }
+
             var model = new
             {
                 Valid = true,
@@ -191,7 +200,9 @@ namespace ProjetoEngSoftII.Controllers.Covid
                     Cpf = paciente.Cpf,
                     Rg = paciente.Rg,
                     Cns = paciente.Cns
-                }
+                },
+                TomouPrimeiraDose = tomouPrimeraDose,
+                MarcaVacinaId = marcaVacinaId
             };           
 
             return Ok(model);
@@ -227,9 +238,13 @@ namespace ProjetoEngSoftII.Controllers.Covid
             return File(filedata, "application/pdf");
         }
 
-        public Vacinado TrataVacinado(Vacinado vacinado)
+        private Vacinado ProcessaVacinado(Vacinado vacinado)
         {
             vacinado.PacienteCpf = vacinado.PacienteCpf.RemovePontoEHifem();
+
+            if (vacinado.Dose.Equals(Doses.PrimeiraDose))
+                vacinado.DataPrevisaoSegundaDose = vacinado.DataVacinacao.AddDays(_covidRepository.GetMarcaVacinaCovidById(vacinado.MarcaVacinaCovidId).DiasParaSegundaDose);
+
             return vacinado;
         }
     }

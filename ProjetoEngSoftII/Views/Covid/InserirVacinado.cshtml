@@ -26,11 +26,11 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Vacinado.MarcaVacinaCovidId" class="control-label"></label>
-                    <select asp-for="Vacinado.MarcaVacinaCovidId" class="form-control" asp-items="@(new SelectList(Model.MarcasVacinaCovid,"Id", "Marca"))"></select>
+                    <select asp-for="Vacinado.MarcaVacinaCovidId" class="form-control" id="select_marca_covid" asp-items="@(new SelectList(Model.MarcasVacinaCovid,"Id", "Marca"))"></select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Vacinado.Dose" class="control-label"></label>
-                    <select asp-for="Vacinado.Dose" class="form-control" asp-items="@(new SelectList(doses))"></select>
+                    <select asp-for="Vacinado.Dose" class="form-control" id="select_dose" asp-items="@(new SelectList(doses))"></select>
                 </div>
                 <div class="form-group">
                     <label asp-for="Vacinado.Lote" class="control-label"></label>

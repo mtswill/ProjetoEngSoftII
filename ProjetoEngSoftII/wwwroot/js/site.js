@@ -3,12 +3,10 @@
     var length = document.getElementById("cpf-paciente").value.length;
 
     if (event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 46) {
-        if (length === 3 || length === 7)
-        {
+        if (length === 3 || length === 7) {
             document.getElementById("cpf-paciente").value = document.getElementById("cpf-paciente").value + ".";
         }
-        else if (length === 11)
-        {
+        else if (length === 11) {
             document.getElementById("cpf-paciente").value = document.getElementById("cpf-paciente").value + "-";
         }
     }
@@ -19,12 +17,10 @@ $('#rg-paciente').on("keyup", function (event) {
     var length = document.getElementById("rg-paciente").value.length;
 
     if (event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 46) {
-        if (length === 2 || length === 6)
-        {
+        if (length === 2 || length === 6) {
             document.getElementById("rg-paciente").value = document.getElementById("rg-paciente").value + ".";
         }
-        else if (length === 10)
-        {
+        else if (length === 10) {
             document.getElementById("rg-paciente").value = document.getElementById("rg-paciente").value + "-";
         }
     }
@@ -37,24 +33,20 @@ $('#cpf-vacinado').on("keyup", function (event) {
     var containerInformacoesPaciente = document.getElementById("container-informacoes-paciente");
 
     if (event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 46) {
-        if (length === 3 || length === 7)
-        {
+        if (length === 3 || length === 7) {
             document.getElementById("cpf-vacinado").value = document.getElementById("cpf-vacinado").value + ".";
         }
-        else if (length === 11)
-        {
+        else if (length === 11) {
             document.getElementById("cpf-vacinado").value = document.getElementById("cpf-vacinado").value + "-";
         }
     }
 
-    if (length === 14)
-    {        
+    if (length === 14) {
         if (containerInserirVacinado.style.display === "none") {
             getInformacoesPaciente(cpf);
         }
     }
-    else
-    {
+    else {
         containerInserirVacinado.style.display = "none";
         containerInformacoesPaciente.style.display = "none";
     }
@@ -73,6 +65,27 @@ function getInformacoesPaciente(cpf) {
 
             document.getElementById("container-inserir-vacinado").style.display = "block";
             document.getElementById("container-informacoes-paciente").style.display = "block";
+
+            var tomouPrimeiraDose = obj.tomouPrimeiraDose;
+            
+            if (tomouPrimeiraDose) {
+                var select_dose = document.getElementById("select_dose");
+                select_dose.remove(0);
+
+                var marcaVacinaId = obj.marcaVacinaId;
+                var select_marca = document.getElementById("select_marca_covid");
+                var selectLength = select_marca.length;
+
+                for (var i = 0; i < selectLength; i++) {
+                    if ((i - 1) != marcaVacinaId) {
+                        select_marca.remove(i);
+                    }
+                }
+            }
+            else {
+                var select_dose = document.getElementById("select_dose");
+                select_dose.remove(1);
+            }
         },
         error: function () {
             window.alert("Paciente não encontrado!");
