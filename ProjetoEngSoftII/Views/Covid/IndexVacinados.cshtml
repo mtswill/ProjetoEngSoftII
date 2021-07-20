@@ -56,7 +56,7 @@
                     @Html.DisplayFor(modelItem => item.Vacinador.Nome)
                 </td>
                 <td>
-                    <a asp-action="EmitirCarteiraVacinacaoCovid" asp-route-cpf="@item.PacienteCpf">Carteira Vacinacao</a>
+                    <a target="_blank" asp-action="EmitirCarteiraVacinacaoCovid" asp-route-cpf="@item.PacienteCpf">Carteira de vacinação</a>
                 </td>
             </tr>
         }

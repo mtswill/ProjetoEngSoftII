@@ -8,6 +8,7 @@ using ProjetoEngSoftII.Repositories.CovidRepository;
 using ProjetoEngSoftII.Repositories.PacienteRespository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -220,9 +221,10 @@ namespace ProjetoEngSoftII.Controllers.Covid
                                                      vacinado.DataVacinacao,
                                                      vacinado.DataPrevisaoSegundaDose);
 
-            carteiraVacinacao.CreatePdf(vacinadoModel);
-
-            return View();
+            var path = carteiraVacinacao.CreatePdf(vacinadoModel);
+            byte[] filedata = System.IO.File.ReadAllBytes(path);
+            
+            return File(filedata, "application/pdf");
         }
 
         public Vacinado TrataVacinado(Vacinado vacinado)

@@ -14,8 +14,10 @@ namespace ProjetoEngSoftII.Helpers
     {
         private string pathImagemModelo = Directory.GetCurrentDirectory() + @"\Files\modelo_carteira_vacinacao_covid.png";
 
-        public void CreatePdf(VacinadoPdfModel vacinado)
+        public string CreatePdf(VacinadoPdfModel vacinado)
         {
+            var pathDoArquivo = string.Empty;
+
             using (var doc = new PdfSharp.Pdf.PdfDocument())
             {
                 var page = doc.AddPage();
@@ -47,9 +49,12 @@ namespace ProjetoEngSoftII.Helpers
                 try
                 {
                     doc.Save(path);
+                    pathDoArquivo = path;
                 }
                 catch { }
             }
+
+            return pathDoArquivo;
         }
 
         private XTextFormatter PrintaPrimeiraDose(XTextFormatter textFormatter, XFont font, PdfPage page, VacinadoPdfModel vacinado)
