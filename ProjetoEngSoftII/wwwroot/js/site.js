@@ -18,9 +18,7 @@
     if (length === 14)
     {        
         if (containerInserirVacinado.style.display === "none") {
-            containerInserirVacinado.style.display = "block";
             getInformacoesPaciente(cpf);
-            containerInformacoesPaciente.style.display = "block";
         }
     }
     else
@@ -35,14 +33,19 @@ function getInformacoesPaciente(cpf) {
         url: '/Covid/GetInformacoesPaciente?cpf=' + cpf,
         type: 'GET',
         contentType: 'application/json;',
-        success: function () {
-            document.getElementById("input-nome-paciente-inserir-vacinado").value = "Matheus";
-            document.getElementById("input-rg-paciente-inserir-vacinado").value = "52.996.464-8";
-            document.getElementById("input-cpf-paciente-inserir-vacinado").value = "462.604.568-59";
-            document.getElementById("input-cns-paciente-inserir-vacinado").value = "aaaaaaaaaaaaaaa123456";
+        success: function (obj) {
+            document.getElementById("input-nome-paciente-inserir-vacinado").value = obj.paciente.nome;
+            document.getElementById("input-rg-paciente-inserir-vacinado").value = obj.paciente.rg;
+            document.getElementById("input-cpf-paciente-inserir-vacinado").value = obj.paciente.cpf;
+            document.getElementById("input-cns-paciente-inserir-vacinado").value = obj.paciente.cns;
+
+            document.getElementById("container-inserir-vacinado").style.display = "block";
+            document.getElementById("container-informacoes-paciente").style.display = "block";
         },
         error: function () {
-            window.alert("teste");
+            window.alert("Paciente não encontrado!");
+            document.getElementById("container-inserir-vacinado").style.display = "none";
+            document.getElementById("container-informacoes-paciente").style.display = "none";
         }
     });
 }
