@@ -1,4 +1,6 @@
-﻿@model IEnumerable<ProjetoEngSoftII.Models.Paciente>
+﻿@using ProjetoEngSoftII.Helpers;
+
+@model IEnumerable<ProjetoEngSoftII.Models.Paciente>
 
 @{
     ViewData["Title"] = "Index";
@@ -31,29 +33,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cns)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-cpf="@item.Cpf">Editar</a> |
-                <a asp-action="Details" asp-route-cpf="@item.Cpf">Detalhes</a>
-                <!--<a asp-action="Delete" asp-route-cpf="@item.Cpf">Delete</a>-->
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @item.Cpf.InserePontoEHifemCpf()
+                </td>
+                <td>
+                    @item.Rg.InserePontoEHifemRg()
+                </td>
+                <td>
+                    @item.DataNascimento.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cns)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-cpf="@item.Cpf">Editar</a> |
+                    <a asp-action="Details" asp-route-cpf="@item.Cpf">Detalhes</a>
+                    <!--<a asp-action="Delete" asp-route-cpf="@item.Cpf">Delete</a>-->
+                </td>
+
+
+            </tr>
+        }
     </tbody>
 </table>
