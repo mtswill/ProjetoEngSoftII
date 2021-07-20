@@ -1,4 +1,36 @@
-﻿$('#cpf-vacinado').on("keyup", function (event) {
+﻿$('#cpf-paciente').on("keyup", function (event) {
+    var cpf = document.getElementById("cpf-paciente").value;
+    var length = document.getElementById("cpf-paciente").value.length;
+
+    if (event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 46) {
+        if (length === 3 || length === 7)
+        {
+            document.getElementById("cpf-paciente").value = document.getElementById("cpf-paciente").value + ".";
+        }
+        else if (length === 11)
+        {
+            document.getElementById("cpf-paciente").value = document.getElementById("cpf-paciente").value + "-";
+        }
+    }
+});
+
+$('#rg-paciente').on("keyup", function (event) {
+    var cpf = document.getElementById("rg-paciente").value;
+    var length = document.getElementById("rg-paciente").value.length;
+
+    if (event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 46) {
+        if (length === 2 || length === 6)
+        {
+            document.getElementById("rg-paciente").value = document.getElementById("rg-paciente").value + ".";
+        }
+        else if (length === 10)
+        {
+            document.getElementById("rg-paciente").value = document.getElementById("rg-paciente").value + "-";
+        }
+    }
+});
+
+$('#cpf-vacinado').on("keyup", function (event) {
     var cpf = document.getElementById("cpf-vacinado").value;
     var length = document.getElementById("cpf-vacinado").value.length;
     var containerInserirVacinado = document.getElementById("container-inserir-vacinado");

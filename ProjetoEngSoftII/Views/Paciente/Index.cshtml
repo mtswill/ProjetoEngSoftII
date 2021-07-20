@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Cns)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cpf)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cns)
             </th>
             <th></th>
         </tr>
@@ -34,19 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Cpf)
+                @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                @Html.DisplayFor(modelItem => item.Cpf)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rg)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cns)
+                @Html.DisplayFor(modelItem => item.DataNascimento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
+                @Html.DisplayFor(modelItem => item.Cns)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-cpf="@item.Cpf">Editar</a> |

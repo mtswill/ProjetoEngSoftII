@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ProjetoEngSoftII.Data;
 using ProjetoEngSoftII.Models;
-using ProjetoEngSoftII.Repositories;
+using ProjetoEngSoftII.Helpers;
 using ProjetoEngSoftII.Repositories.PacienteRespository;
 
 namespace ProjetoEngSoftII.Controllers
@@ -54,6 +50,8 @@ namespace ProjetoEngSoftII.Controllers
         {
             if (ModelState.IsValid)
             {
+                paciente.Cpf = paciente.Cpf.RemovePontoEHifem();
+                paciente.Rg = paciente.Rg.RemovePontoEHifem();
                 _repository.Create(paciente);
                 return RedirectToAction(nameof(Index));
             }
