@@ -184,11 +184,13 @@ namespace ProjetoEngSoftII.Controllers.Covid
             var vacinado = _covidRepository.GetVacinadoByCpf(cpf);
             var marcaVacinaId = string.Empty;
             var tomouPrimeraDose = false;
+            var dataVacinacao = DateTime.Now;
 
             if (vacinado != null)
             {
                 tomouPrimeraDose = true;
                 marcaVacinaId = vacinado.MarcaVacinaCovidId.ToString();
+                dataVacinacao = vacinado.DataPrevisaoSegundaDose;
             }
 
             var model = new
@@ -202,7 +204,10 @@ namespace ProjetoEngSoftII.Controllers.Covid
                     Cns = paciente.Cns
                 },
                 TomouPrimeiraDose = tomouPrimeraDose,
-                MarcaVacinaId = marcaVacinaId
+                MarcaVacinaId = marcaVacinaId,
+                yyyy = dataVacinacao.Year,
+                mm = dataVacinacao.Month,
+                dd = dataVacinacao.Day
             };           
 
             return Ok(model);

@@ -80,7 +80,10 @@ function getInformacoesPaciente(cpf) {
                         if (select_marca.options[i].value != marcaVacinaId)
                             select_marca.remove(i);
                     }
-                }                
+                }
+
+                var data = obj.yyyy + '-' + obj.mm + '-' + obj.dd;
+                document.getElementById("data_vacinacao").setAttribute("min", data);
             }
             else {
                 var select_dose = document.getElementById("select_dose");

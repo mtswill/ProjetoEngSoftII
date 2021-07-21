@@ -105,7 +105,7 @@ namespace ProjetoEngSoftII.Helpers
             textFormatter.DrawString(vacinado.Cnes, font, XBrushes.Black, new XRect(525, 253, page.Width, page.Height));
 
             //data - 2a dose
-            textFormatter.DrawString(vacinado.DataVacinacao.ToString("dd/MM/yyyy"), font, XBrushes.Black, new XRect(525, 296, page.Width, page.Height));
+            textFormatter.DrawString(vacinado.DataVacinacao.ToString(), font, XBrushes.Black, new XRect(525, 296, page.Width, page.Height));
 
             //lote - 2a dose
             textFormatter.DrawString(vacinado.Lote, font, XBrushes.Black, new XRect(525, 339, page.Width, page.Height));
