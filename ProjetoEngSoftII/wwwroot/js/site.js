@@ -74,13 +74,13 @@ function getInformacoesPaciente(cpf) {
 
                 var marcaVacinaId = obj.marcaVacinaId;
                 var select_marca = document.getElementById("select_marca_covid");
-                var selectLength = select_marca.length;
 
-                for (var i = 0; i < selectLength; i++) {
-                    if ((i - 1) != marcaVacinaId) {
-                        select_marca.remove(i);
+                while (document.getElementById("select_marca_covid").length != 1) {
+                    for (var i = 0; i < select_marca.length; i++) {
+                        if (select_marca.options[i].value != marcaVacinaId)
+                            select_marca.remove(i);
                     }
-                }
+                }                
             }
             else {
                 var select_dose = document.getElementById("select_dose");
