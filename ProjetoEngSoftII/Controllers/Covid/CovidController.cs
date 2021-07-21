@@ -211,26 +211,49 @@ namespace ProjetoEngSoftII.Controllers.Covid
         public IActionResult EmitirCarteiraVacinacaoCovid(string cpf)
         {
             var carteiraVacinacao = new PdfCreator();
-            var vacinado = _covidRepository.GetVacinadoByCpf(cpf);
+            var vacinados = _covidRepository.GetVacinadoByCpfList(cpf);
 
-            if (vacinado == null)
+            if (vacinados == null)
                 return View();
 
-            vacinado.Paciente = _pacienteRepository.FindByCpf(cpf);
-            vacinado.MarcaVacinaCovid = _covidRepository.GetMarcaVacinaCovidById(vacinado.MarcaVacinaCovidId);
-            vacinado.Vacinador = _covidRepository.GetVacinadorByRegistro(vacinado.VacinadorRegistroProfissional);
+            var vacinadoModel = new List<VacinadoPdfModel>();
 
-            var vacinadoModel = new VacinadoPdfModel(vacinado.PacienteCpf,
-                                                     vacinado.Paciente.Nome,
-                                                     vacinado.Dose,
-                                                     vacinado.MarcaVacinaCovid.Marca,
-                                                     vacinado.Unidade,
-                                                     vacinado.Vacinador.Nome,
-                                                     vacinado.Lote,
-                                                     vacinado.Vacinador.RegistroProfissional.ToString(),
-                                                     vacinado.Paciente.Cns,
-                                                     vacinado.DataVacinacao,
-                                                     vacinado.DataPrevisaoSegundaDose);
+            foreach (var vacinado in vacinados)
+            {
+                if (vacinado.Dose.Equals(Doses.PrimeiraDose))
+                {
+                    vacinado.Paciente = _pacienteRepository.FindByCpf(cpf);
+                    vacinado.MarcaVacinaCovid = _covidRepository.GetMarcaVacinaCovidById(vacinado.MarcaVacinaCovidId);
+                    vacinado.Vacinador = _covidRepository.GetVacinadorByRegistro(vacinado.VacinadorRegistroProfissional);
+
+                    vacinadoModel.Add(new VacinadoPdfModel(vacinado.PacienteCpf,
+                                                             vacinado.Paciente.Nome,
+                                                             vacinado.Dose,
+                                                             vacinado.MarcaVacinaCovid.Marca,
+                                                             vacinado.Unidade,
+                                                             vacinado.Vacinador.Nome,
+                                                             vacinado.Lote,
+                                                             vacinado.Vacinador.RegistroProfissional.ToString(),
+                                                             vacinado.Paciente.Cns,
+                                                             vacinado.DataVacinacao,
+                                                             vacinado.DataPrevisaoSegundaDose));
+                }
+                else if (vacinado.Dose.Equals(Doses.SegundaDose))
+                {
+                    vacinadoModel.Add(new VacinadoPdfModel(vacinado.PacienteCpf,
+                                                             vacinado.Paciente.Nome,
+                                                             vacinado.Dose,
+                                                             vacinado.MarcaVacinaCovid.Marca,
+                                                             vacinado.Unidade,
+                                                             vacinado.Vacinador.Nome,
+                                                             vacinado.Lote,
+                                                             vacinado.Vacinador.RegistroProfissional.ToString(),
+                                                             vacinado.Paciente.Cns,
+                                                             vacinado.DataVacinacao,
+                                                             vacinado.DataVacinacao));
+                }
+            }
+
 
             var path = carteiraVacinacao.CreatePdf(vacinadoModel);
             byte[] filedata = System.IO.File.ReadAllBytes(path);

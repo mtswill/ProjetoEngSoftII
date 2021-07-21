@@ -113,5 +113,8 @@ namespace ProjetoEngSoftII.Repositories.CovidRepository
 
         public Vacinado GetVacinadoByCpf(string cpf)
             => _context.Vacinado.FirstOrDefault(v => v.PacienteCpf.Equals(cpf));
+        
+        public List<Vacinado> GetVacinadoByCpfList(string cpf)
+            => _context.Vacinado.Where(v => v.PacienteCpf.Equals(cpf)).OrderBy(v => v.Dose).ToList();
     }
 }
