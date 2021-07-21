@@ -21,6 +21,7 @@ namespace ProjetoEngSoftII.Models.Vacinas
         public DateTime DataPrevisaoSegundaDose { get; set; }
 
         [ForeignKey("marca_vacina_covid_id")]
+        [Display(Name = "Marca da vacina")]
         public long MarcaVacinaCovidId { get; set; }
 
         public string Dose { get; set; }
