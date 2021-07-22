@@ -82,7 +82,23 @@ function getInformacoesPaciente(cpf) {
                     }
                 }
 
-                var data = obj.yyyy + '-' + obj.mm + '-' + obj.dd;
+                var mm = '0';
+                if (obj.mm < 10) {
+                    mm = mm.concat(obj.mm);
+                }
+                else {
+                    mm = obj.mm;
+                }
+
+                var dd = '0';
+                if (obj.dd < 10) {
+                    dd = dd.concat(obj.dd);
+                }
+                else {
+                    dd = obj.dd;
+                }
+
+                var data = obj.yyyy + '-' + mm + '-' + dd;
                 document.getElementById("data_vacinacao").setAttribute("min", data);
             }
             else {
