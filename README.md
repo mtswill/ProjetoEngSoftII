@@ -4,6 +4,7 @@
 Tem como objetivo desenvolver parte de um projeto que, neste caso, é um sistema voltado para a rede pública de saúde, onde é possível unificar consultas, vacinas, exames, etc. de pacientes em geral.
 Este projeto em específico possui uma implementação dedicada a pandemia da Covid-19, onde é possível inserir vacinados, vacinadores e emitir a carteira nacional de vacinação contra o vírus.
 
+Link para apresentação do projeto em vídeo: https://www.youtube.com/watch?v=kGsj8q-KORw
 
 ### Pacientes
 Na aba 'pacientes' é possível visualizar uma listagem com todos os pacientes cadastrados. Clicando no botão 'Cadastrar novo paciente' é possível realizar o cadastro de um paciente. Clicando no botão 'Editar' é possível editá-lo.
